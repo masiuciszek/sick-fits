@@ -4,7 +4,7 @@ const Sell = () => {
   let a;
   return (
     <div>
-      <h1>SElll</h1>
+      <h1>Sell</h1>
     </div>
   );
 };

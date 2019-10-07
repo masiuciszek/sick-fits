@@ -124,7 +124,7 @@ var Sell = function Sell() {
       lineNumber: 7
     },
     __self: this
-  }, "SElll"));
+  }, "Sell"));
 };
 
 Sell.propTypes = {};

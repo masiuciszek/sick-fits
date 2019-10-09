@@ -11,7 +11,6 @@ const Mutations = {
       info
     );
 
-    // TODO: Remove console.log
     console.log(item);
 
     return item;

@@ -4,7 +4,3 @@ datamodel: datamodel.prisma
 hooks:
   post-deploy:
     - graphql get-schema -p prisma
-# hooks:
-#   post-deploy:
-#     - prisma generate
-# datamodel: datamodel.prisma

@@ -1,15 +1,4 @@
-node_modules/
-
 env/
-.env
 .env/
-
-variables.env
 variables.env/
-
-
-
-datamodel.prisma
-
-.graphqlconfig.yml
-.graphqlconfig/
+node_modules/

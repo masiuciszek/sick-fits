@@ -561,9 +561,9 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.545.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.545.0.tgz#98c50ddfc806376a18cf72f4d4c3d2fdfe25046d"
-  integrity sha512-oQjpvvTkh2a7CvWhSUcFQWkpfkM3wVpzvLgGMInoZ6QIOsuQ+oNKz+zq48yQ619/GP8XnOh0zBQJLcYaa3XAKw==
+  version "2.548.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.548.0.tgz#20a3c7a77e1c6fd694cdb5e0ecc0ccf0d0542674"
+  integrity sha512-dnG1MEc3uOonGDswHPiq7TYn6EOG3+IQhF2LSRambz9adaZxwRgFOII7UVPJjh33FtxKpMzOSmf62R+EX822Nw==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -1580,9 +1580,9 @@ command-exists@^1.2.2:
   integrity sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
 
 commander@^2.11.0, commander@^2.5.0, commander@^2.7.1, commander@^2.9.0:
-  version "2.20.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.1.tgz#3863ce3ca92d0831dcf2a102f5fb4b5926afd0f9"
-  integrity sha512-cCuLsMhJeWQ/ZpsFTbE765kvVfoeSddc4nU3up4fV+fDBcfUXnbITJ+JzhkdjzOqhURjZgujxaioam4RM9yGUg==
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
 commander@~2.8.1:
   version "2.8.1"
@@ -2122,9 +2122,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.47:
-  version "1.3.278"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.278.tgz#04c8f96382395aca225bc340be6b9dbbe2bf50eb"
-  integrity sha512-4cPkOCY5k4z69MHOA96VUt+Wl24AbLHQcm7W9ckabJ/iRe7oBFNMiliw75lK/w++R9bKCUxJ0mFnMRMylnAlbA==
+  version "1.3.281"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.281.tgz#2dbeb9f0bdffddb1662f9ca00d26c49d31dc0f7e"
+  integrity sha512-oxXKngPjTWRmXFy4vV9FeAkPl7wU4xMejfOY+HXjGrj4T0z9l96loWWVDLJEtbT/aPKOWKrSz6xoYxd+YJ/gJA==
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -5052,9 +5052,9 @@ npm-conf@^1.1.0:
     pify "^3.0.0"
 
 npm-packlist@^1.1.6:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.4.5.tgz#46d14d60ce52ff8c370bf72c5bc4cf665dd21f33"
-  integrity sha512-hU4dGCkPXoAb2NBmFR00PC1yQ5NQJ5cMxFFilTYmizXiRQudFMDby4KXPs0wtV67Hs66fHvyHtTkEqP+qUctiQ==
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.4.6.tgz#53ba3ed11f8523079f1457376dd379ee4ea42ff4"
+  integrity sha512-u65uQdb+qwtGvEJh/DgQgW1Xg7sqeNbmxYyrvlNznaVTjV3E5P6F/EFjM+BVHXl7JJlsdG8A64M0XI8FI/IOlg==
   dependencies:
     ignore-walk "^3.0.1"
     npm-bundled "^1.0.1"

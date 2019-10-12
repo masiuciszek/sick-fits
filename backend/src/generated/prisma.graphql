@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/marcell-ciszek-druzynski-7d1828/sick-fitsss/dev
-# timestamp: Thu Oct 10 2019 17:08:35 GMT+0200 (Central European Summer Time)
+# source: https://us1.prisma.sh/marcell-ciszek-druzynski-7d1828/sick-fits/dev
+# timestamp: Sat Oct 12 2019 15:38:22 GMT+0200 (Central European Summer Time)
 
 type AggregateItem {
   count: Int!
@@ -14,8 +14,12 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 type Item implements Node {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   title: String!
   description: String!
   image: String
@@ -54,6 +58,10 @@ type ItemEdge {
 enum ItemOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   title_ASC
   title_DESC
   description_ASC
@@ -68,6 +76,8 @@ enum ItemOrderByInput {
 
 type ItemPreviousValues {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   title: String!
   description: String!
   image: String
@@ -179,6 +189,50 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   title: String
 
   """All values that are not equal to given value."""

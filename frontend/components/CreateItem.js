@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
@@ -36,12 +37,34 @@ const CreateItem = () => {
   });
   const { title, description, image, largeImage, price } = formData;
 
-
   const handleChange = e => {
     const { name, type, value } = e.target;
 
     const val = type === 'number' ? parseFloat(value) : value;
     setFormData({ ...formData, [name]: val });
+  };
+
+  const uploadFile = async e => {
+    console.log('uploading file....');
+
+    const { files } = e.target;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sickfits');
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/mobilityguard/image/upload`,
+      {
+        method: 'POST',
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log(file);
+    setFormData({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
   };
 
   return (
@@ -52,6 +75,7 @@ const CreateItem = () => {
             onSubmit={async e => {
               e.preventDefault();
               const res = await createItem();
+              // TODO: delete
               console.log(res);
               Router.push({
                 pathname: '/item',
@@ -61,6 +85,16 @@ const CreateItem = () => {
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="title">File</label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                placeholder="File"
+                required
+                // value={image}
+                onChange={uploadFile}
+              />
               <label htmlFor="title">Title</label>
               <input
                 type="text"

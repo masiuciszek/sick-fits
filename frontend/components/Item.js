@@ -5,6 +5,7 @@ import Title from './styles/Title';
 import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
 
 const Item = props => {
   const { item } = props;
@@ -35,7 +36,7 @@ const Item = props => {
           <a> Edit 🖌 </a>
         </Link>
         <button type="button">Add to Cart</button>
-        <button type="button">Delete</button>
+        <DeleteItem text="Delete Item" icon="🗑" id={item.id} />
       </div>
     </ItemStyles>
   );

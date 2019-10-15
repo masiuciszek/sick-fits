@@ -2,7 +2,9 @@
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Item from './Item';
+import Pagination from './Pagination';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY {
@@ -17,10 +19,11 @@ const ALL_ITEMS_QUERY = gql`
   }
 `;
 
-const Items = () => {
+const Items = ({ page }) => {
   let a;
   return (
     <Center>
+      <Pagination page={page} />
       <h1>Items</h1>
       <Query query={ALL_ITEMS_QUERY}>
         {({ data, error, loading }) => {
@@ -40,8 +43,13 @@ const Items = () => {
           );
         }}
       </Query>
+      <Pagination page={page} />
     </Center>
   );
+};
+
+Items.propTypes = {
+  page: PropTypes.string,
 };
 
 const Center = styled.div`

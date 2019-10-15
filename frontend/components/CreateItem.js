@@ -45,22 +45,21 @@ const CreateItem = () => {
   };
 
   const uploadFile = async e => {
-    console.log('uploading file....');
-
     const { files } = e.target;
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'sickfits');
-
+    // https://res.cloudinary.com/mobilityguard/image/upload/
+    // https://api.cloudinary.com/v1_1/wesbostutorial/image/upload
     const res = await fetch(
-      `https://api.cloudinary.com/v1_1/mobilityguard/image/upload`,
+      `https://res.cloudinary.com/v1_1/mobilityguard/image/upload`,
       {
         method: 'POST',
         body: data,
       }
     );
     const file = await res.json();
-    console.log(file);
+
     setFormData({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
@@ -85,46 +84,53 @@ const CreateItem = () => {
           >
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
-              <label htmlFor="title">File</label>
-              <input
-                type="file"
-                id="file"
-                name="file"
-                placeholder="File"
-                required
-                // value={image}
-                onChange={uploadFile}
-              />
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Title"
-                required
-                value={title}
-                onChange={handleChange}
-              />
-              <label htmlFor="title">Price</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                placeholder="Price"
-                required
-                value={price}
-                onChange={handleChange}
-              />
-              <label htmlFor="title">Description</label>
-              <textarea
-                type="text"
-                id="description"
-                name="description"
-                placeholder="Description"
-                required
-                value={description}
-                onChange={handleChange}
-              />
+              <label htmlFor="title">
+                File
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder="File"
+                  required
+                  onChange={uploadFile}
+                />
+              </label>
+              <label htmlFor="title">
+                Title
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Title"
+                  required
+                  value={title}
+                  onChange={handleChange}
+                />
+              </label>
+              <label htmlFor="title">
+                Price
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  placeholder="Price"
+                  required
+                  value={price}
+                  onChange={handleChange}
+                />
+              </label>
+              <label htmlFor="title">
+                Description
+                <textarea
+                  type="text"
+                  id="description"
+                  name="description"
+                  placeholder="Description"
+                  required
+                  value={description}
+                  onChange={handleChange}
+                />
+              </label>
             </fieldset>
             <button type="submit">Submit</button>
           </Form>

@@ -1,13 +1,12 @@
 import Items from '../components/Items';
-import { BtnSlide } from '../components/styles/Button';
 
-const Home = () => {
-  let a;
+const Home = props => {
+  const { query } = props;
+
   return (
     <div>
       <h1>Home</h1>
-      <BtnSlide>sas</BtnSlide>
-      <Items />
+      <Items page={parseFloat(query.page) || 1} />
     </div>
   );
 };

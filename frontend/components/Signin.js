@@ -7,13 +7,9 @@ import Error from './ErrorMessage';
 import Form from './styles/Form';
 import { CURRENT_USER_QUERY } from './User';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $email: String!
-    $name: String!
-    $password: String!
-  ) {
-    signup(email: $email, name: $name, password: $password) {
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
       id
       email
       name
@@ -23,17 +19,15 @@ const SIGNUP_MUTATION = gql`
 
 const Signup = () => {
   /**
-   * @type {name} String
    * @type {email} String
    * @type {password} String
    */
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   });
 
-  const { name, email, password } = formData;
+  const { email, password } = formData;
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,29 +36,28 @@ const Signup = () => {
   return (
     <>
       <Mutation
-        mutation={SIGNUP_MUTATION}
-        variables={formData}
+        mutation={SIGNIN_MUTATION}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        variables={formData}
       >
-        {(signup, { error, loading }) => (
+        {(signin, { error, loading }) => (
           <Form
             method="POST"
             onSubmit={async e => {
               e.preventDefault();
               /**
-               * @type {signup} function
+               * @type {signin} function
                * @param {mutation} graphql-server
                */
-              await signup();
+              await signin();
               setFormData({
-                name: '',
                 email: '',
                 password: '',
               });
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign up</h2>
+              <h2>Sign in</h2>
               <Error error={error} />
               <label htmlFor="email">
                 Email
@@ -73,17 +66,6 @@ const Signup = () => {
                   name="email"
                   placeholder="Email"
                   value={email}
-                  onChange={handleChange}
-                />
-              </label>
-
-              <label htmlFor="name">
-                Name
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={name}
                   onChange={handleChange}
                 />
               </label>
@@ -98,7 +80,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
               </label>
-              <button type="submit">Sign up</button>
+              <button type="submit">Sign in</button>
             </fieldset>
           </Form>
         )}

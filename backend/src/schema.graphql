@@ -12,7 +12,7 @@ type Mutation {
   signout: SuccessMessage
   deleteUser(id: ID!): User
   requestReset(email: String!): SuccessMessage
-  requestPassword(resetToken: String! password: String!, confirmPassword: String!): User!
+  resetPassword(resetToken: String! password: String!, confirmPassword: String!): User!
 }
 
 type Query {

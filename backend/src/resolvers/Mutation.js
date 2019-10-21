@@ -113,10 +113,10 @@ const Mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry },
     });
-    console.log(res);
+
     return { message: 'Thank you!' };
   },
-  async requestPassword(parent, args, ctx, info) {
+  async resetPassword(parent, args, ctx, info) {
     if (args.password !== args.confirmPassword) {
       throw new Error('no matching password');
     }

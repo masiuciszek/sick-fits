@@ -42,7 +42,7 @@ const Mutations = {
       info
     );
   },
-  async deleteItem(parent, arg, ctx, info) {
+  async deleteItem(parent, args, ctx, info) {
     const where = { id: args.id };
 
     const item = await ctx.db.query.item({ where }, `{ id title}`);

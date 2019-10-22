@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import CreateItem from '../components/CreateItem';
+import PleaseSignin from '../components/PleaseSignin';
 
 const Sell = () => {
   let a;
   return (
     <div>
-      <h1>Sell</h1>
-      <CreateItem />
+      <PleaseSignin>
+        <CreateItem />
+      </PleaseSignin>
     </div>
   );
 };

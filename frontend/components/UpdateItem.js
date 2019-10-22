@@ -51,15 +51,12 @@ const UpdateItem = ({ id }) => {
 
   const updateNewItem = async (e, updateItemMutation) => {
     e.preventDefault();
-    console.log('Updating Item!!');
-    console.log(formData);
     const res = await updateItemMutation({
       variables: {
         id,
         ...formData,
       },
     });
-    console.log('Updated!!');
   };
 
   return (

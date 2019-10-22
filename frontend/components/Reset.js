@@ -45,7 +45,15 @@ const Reset = props => {
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {(reset, { error, loading, called }) => (
+        {(
+          reset,
+          {
+            error,
+            loading,
+            // @ts-ignore
+            called,
+          }
+        ) => (
           <Form
             method="POST"
             onSubmit={async e => {

@@ -20,7 +20,7 @@ const DELETE_ITEM_MUTATION = gql`
  */
 const DeleteItem = ({ text, icon, id }) => {
   const update = (cache, payload) => {
-    // updatethe client so it matches with the server
+    // update's client so it matches with the server
 
     const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
     data.items = data.items.filter(

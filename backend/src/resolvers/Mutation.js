@@ -6,9 +6,18 @@ const { transport, makeNiceTemplateEmail } = require('../mail');
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error('You must be logged in');
+    }
     const item = await ctx.db.mutation.createItem(
       {
         data: {
+          // Relationship between item and user
+          user: {
+            connect: {
+              id: ctx.request.userId,
+            },
+          },
           ...args,
         },
       },
@@ -33,12 +42,12 @@ const Mutations = {
       info
     );
   },
-  async deleteItem(parent, { args }, { db }, info) {
+  async deleteItem(parent, arg, ctx, info) {
     const where = { id: args.id };
-    const item = await db.query.item({ where }, `{id title}`);
 
-    return db.mutation.deleteItem({ where }, info);
-    // item
+    const item = await ctx.db.query.item({ where }, `{ id title}`);
+
+    return ctx.db.mutation.deleteItem({ where }, info);
   },
   async deleteUser(parent, args, { db }, info) {
     const where = { id: args.id };

@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import PleaseSignin from '../components/PleaseSignin';
 import Permissions from '../components/Permissions';
 
-const permissionPage = () => (
+const PermissionPage = () => (
   <div>
     <PleaseSignin>
       <h1>Permissons</h1>
@@ -12,6 +12,4 @@ const permissionPage = () => (
   </div>
 );
 
-permissionPage.propTypes = {};
-
-export default permissionPage;
+export default PermissionPage;

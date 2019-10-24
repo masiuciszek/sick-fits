@@ -26,38 +26,40 @@ const ALL_USERS_QUERY = gql`
   }
 `;
 
-const Permissions = () => {
-  let a;
-  return (
-    <>
-      <Query query={ALL_USERS_QUERY}>
-        {({ data, loading, error }) => {
-          console.log(data);
-          return (
+const Permissions = () => (
+  <>
+    <Query query={ALL_USERS_QUERY}>
+      {({ data, loading, error }) => {
+        console.log(data);
+        return (
+          <div>
+            <Error error={error} />
             <div>
-              <Error error={error} />
-              <div>
-                <h2>Manage Permissions</h2>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      {possiblePermissions.map(permission => (
-                        <th>{permission}</th>
-                      ))}
-                      <th>👇🏻</th>
-                    </tr>
-                  </thead>
-                </Table>
-              </div>
+              <h2>Manage Permissions</h2>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    {possiblePermissions.map(permission => (
+                      <th>{permission}</th>
+                    ))}
+                    <th>👇🏻</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.users.map(user => (
+                    <User key={user.id} user={user} />
+                  ))}
+                </tbody>
+              </Table>
             </div>
-          );
-        }}
-      </Query>
-    </>
-  );
-};
+          </div>
+        );
+      }}
+    </Query>
+  </>
+);
 
 const User = ({ user }) => {
   const { name, email, id } = user;
@@ -79,6 +81,10 @@ const User = ({ user }) => {
       </tr>
     </>
   );
+};
+
+User.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 Permissions.propTypes = {};

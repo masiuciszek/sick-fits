@@ -39,7 +39,9 @@ const DeleteItem = ({ text, icon, id }) => {
           <DeleteBtn
             onClick={() => {
               if (confirm('Are you sure you want to Delete?')) {
-                deleteItem();
+                deleteItem().catch(err => {
+                  alert(err.message);
+                });
               }
             }}
           >

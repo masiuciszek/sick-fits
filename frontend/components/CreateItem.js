@@ -52,7 +52,8 @@ const CreateItem = () => {
     // https://res.cloudinary.com/mobilityguard/image/upload/
     // https://api.cloudinary.com/v1_1/wesbostutorial/image/upload
     const res = await fetch(
-      `https://res.cloudinary.com/v1_1/mobilityguard/image/upload`,
+      // `https://api.cloudinary.com/v1_1/marcell/image/upload`,
+      `https://api.cloudinary.com/v1_1/marcell/image/upload`,
       {
         method: 'POST',
         body: data,

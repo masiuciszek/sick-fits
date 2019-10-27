@@ -1,28 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Query, Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
 import CartStyles from './styles/CartStyles';
 import Supreme from './styles/Supreme';
 import CloseButton from './styles/CloseButton';
 import SickButton from './styles/SickButton';
 
-const Cart = () => {
-  let a;
-  return (
-    <CartStyles>
-      <header>
-        <CloseButton title="Close">&times;</CloseButton>
-        <Supreme>Your Cart</Supreme>
-        <p>You have __ items in your cart.</p>
-      </header>
+const LOCAL_STATE_QUERY = gql`
+  query {
+    cartOpen @client
+  }
+`;
 
-      <footer>
-        <p>$10.10</p>
-        <SickButton>Check out </SickButton>
-      </footer>
-    </CartStyles>
-  );
-};
+const TOGGLE_CART_MUTATION = gql`
+  mutation {
+    toggleCart @client
+  }
+`;
+
+const Cart = () => (
+  <Mutation mutation={TOGGLE_CART_MUTATION}>
+    {toggleCart => (
+      <Query query={LOCAL_STATE_QUERY}>
+        {({ data }) => (
+          <CartStyles open={data.cartOpen}>
+            <header>
+              <CloseButton onClick={toggleCart} title="Close">
+                &times;
+              </CloseButton>
+              <Supreme>Your Cart</Supreme>
+              <p>You have __ items in your cart.</p>
+            </header>
+
+            <footer>
+              <p>$10.10</p>
+              <SickButton>Check out </SickButton>
+            </footer>
+          </CartStyles>
+        )}
+      </Query>
+    )}
+  </Mutation>
+);
 
 Cart.propTypes = {};
 
 export default Cart;
+export { LOCAL_STATE_QUERY, TOGGLE_CART_MUTATION };

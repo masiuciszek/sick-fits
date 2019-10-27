@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import { CURRENT_USER_QUERY } from './User';
 
 const ADD_TO_CART_MUTATION = gql`
   mutation addToCart($id: ID!) {
@@ -12,20 +13,21 @@ const ADD_TO_CART_MUTATION = gql`
   }
 `;
 
-const AddToCart = ({ id }) => {
-  let a;
-  return (
-    <div>
-      <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id }}>
-        {addToCart => (
-          <button type="button" onClick={addToCart}>
-            Add to cart 🛒
-          </button>
-        )}
-      </Mutation>
-    </div>
-  );
-};
+const AddToCart = ({ id }) => (
+  <div>
+    <Mutation
+      mutation={ADD_TO_CART_MUTATION}
+      variables={{ id }}
+      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+    >
+      {(addToCart, { loading }) => (
+        <button disabled={loading} type="button" onClick={addToCart}>
+          {loading && 'ing'}Add to cart 🛒
+        </button>
+      )}
+    </Mutation>
+  </div>
+);
 
 AddToCart.propTypes = {
   id: PropTypes.string,

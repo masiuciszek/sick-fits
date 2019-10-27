@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
-// RENDER PROPS COMPONENT
-
 const CURRENT_USER_QUERY = gql`
   query {
     me {
@@ -12,6 +10,17 @@ const CURRENT_USER_QUERY = gql`
       email
       name
       permissions
+      cart {
+        id
+        quantity
+        item {
+          id
+          title
+          description
+          image
+          price
+        }
+      }
     }
   }
 `;

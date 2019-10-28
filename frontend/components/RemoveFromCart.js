@@ -25,10 +25,30 @@ const REMOVE_FROM_CART_MUTATION = gql`
 `;
 
 const RemoveFromCart = ({ id }) => {
-  let a;
+  // get's called as we get a response back from the server
+  const handleUpdate = (cache, payload) => {
+    const data = cache.readQuery({ query: CURRENT_USER_QUERY });
+
+    const cartItemId = payload.data.removeFromCart.id;
+    data.me.cart = data.me.cart.filter(cartItem => cartItem.id !== cartItemId);
+    cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+  };
+
   return (
     <>
-      <Mutation mutation={REMOVE_FROM_CART_MUTATION} variables={{ id }}>
+      <Mutation
+        mutation={REMOVE_FROM_CART_MUTATION}
+        variables={{ id }}
+        update={handleUpdate}
+        optimisticResponse={{
+          __typename: 'mutation',
+
+          removeFromCart: {
+            __typename: 'CartItem',
+            id,
+          },
+        }}
+      >
         {(removeFromCart, { loading, error }) => (
           <BigBtn
             onClick={() => removeFromCart().catch(err => alert(err.message))}

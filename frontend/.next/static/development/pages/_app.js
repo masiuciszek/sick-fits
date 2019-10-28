@@ -750,15 +750,38 @@ var REMOVE_FROM_CART_MUTATION = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default
 
 var RemoveFromCart = function RemoveFromCart(_ref) {
   var id = _ref.id;
-  var a;
+
+  // get's called as we get a response back from the server
+  var handleUpdate = function handleUpdate(cache, payload) {
+    var data = cache.readQuery({
+      query: _User__WEBPACK_IMPORTED_MODULE_5__["CURRENT_USER_QUERY"]
+    });
+    var cartItemId = payload.data.removeFromCart.id;
+    data.me.cart = data.me.cart.filter(function (cartItem) {
+      return cartItem.id !== cartItemId;
+    });
+    cache.writeQuery({
+      query: _User__WEBPACK_IMPORTED_MODULE_5__["CURRENT_USER_QUERY"],
+      data: data
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_3__["Mutation"], {
     mutation: REMOVE_FROM_CART_MUTATION,
     variables: {
       id: id
     },
+    update: handleUpdate,
+    optimisticResponse: {
+      __typename: 'mutation',
+      removeFromCart: {
+        __typename: 'CartItem',
+        id: id
+      }
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 39
     },
     __self: this
   }, function (removeFromCart, _ref2) {
@@ -773,7 +796,7 @@ var RemoveFromCart = function RemoveFromCart(_ref) {
       title: "delete item",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 33
+        lineNumber: 53
       },
       __self: this
     }, "\xD7");

@@ -25,10 +25,13 @@ const TOGGLE_CART_MUTATION = gql`
 `;
 
 const Composed = adopt({
+  // eslint-disable-next-line react/display-name
   user: ({ render }) => <User>{render}</User>,
+  // eslint-disable-next-line react/display-name
   toggleCart: ({ render }) => (
     <Mutation mutation={TOGGLE_CART_MUTATION}>{render}</Mutation>
   ),
+  // eslint-disable-next-line react/display-name
   localState: ({ render }) => <Query query={LOCAL_STATE_QUERY}>{render}</Query>,
 });
 

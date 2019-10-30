@@ -944,9 +944,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _styles_DropDown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/DropDown */ "./components/styles/DropDown.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "./node_modules/next/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _styles_DropDown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/DropDown */ "./components/styles/DropDown.js");
 
 var _jsxFileName = "/Users/masiuciszek/web-dev/webProjects/sick-fits-masiu/frontend/components/Search.js";
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -979,7 +983,17 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
+
 var SEARCH_ITEMS_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_5___default()(_templateObject());
+
+var routeToItem = function routeToItem(item) {
+  next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
+    pathname: '/item',
+    query: {
+      id: item.id
+    }
+  });
+};
 
 var AutoComplete = function AutoComplete() {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState([]),
@@ -989,8 +1003,10 @@ var AutoComplete = function AutoComplete() {
 
   var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(false),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
-      laoding = _React$useState4[0],
+      loading = _React$useState4[0],
       setLoading = _React$useState4[1];
+
+  Object(downshift__WEBPACK_IMPORTED_MODULE_3__["resetIdCounter"])();
 
   var _onChange = lodash_debounce__WEBPACK_IMPORTED_MODULE_6___default()(
   /*#__PURE__*/
@@ -1031,63 +1047,93 @@ var AutoComplete = function AutoComplete() {
     };
   }(), 350);
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["SearchStyles"], {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_8__["SearchStyles"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 57
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(downshift__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onChange: routeToItem,
+    itemToString: function itemToString(item) {
+      return item === null ? '' : item.title;
     },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_4__["ApolloConsumer"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47
-    },
-    __self: this
-  }, function (client) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-      type: "search",
-      onChange: function onChange(e) {
-        e.persist();
-
-        _onChange(e, client);
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 49
-      },
-      __self: this
-    });
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["DropDown"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 58
     },
     __self: this
-  }, items.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_7__["DropDownItem"], {
-      key: item.id,
+  }, function (_ref2) {
+    var getInputProps = _ref2.getInputProps,
+        getItemProps = _ref2.getItemProps,
+        isOpen = _ref2.isOpen,
+        inputValue = _ref2.inputValue,
+        highlightedIndex = _ref2.highlightedIndex;
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 60
+        lineNumber: 69
       },
       __self: this
-    }, ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-      width: "50",
-      src: item.image,
-      alt: item.title,
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_4__["ApolloConsumer"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 62
+        lineNumber: 70
       },
       __self: this
-    }), item.title);
-  }))));
+    }, function (client) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", _extends({}, getInputProps({
+        type: 'search',
+        placeholder: 'Search For An Item',
+        id: 'search',
+        className: loading ? 'loading' : '',
+        onChange: function onChange(e) {
+          e.persist();
+
+          _onChange(e, client);
+        }
+      }), {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 72
+        },
+        __self: this
+      }));
+    }), isOpen && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_8__["DropDown"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 87
+      },
+      __self: this
+    }, items.map(function (item, index) {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_8__["DropDownItem"], _extends({}, getItemProps({
+        item: item
+      }), {
+        key: item.id,
+        highlighted: index === highlightedIndex,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 89
+        },
+        __self: this
+      }), ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        width: "50",
+        src: item.image,
+        alt: item.title,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 95
+        },
+        __self: this
+      }), item.title);
+    }), !loading && !items.length && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_DropDown__WEBPACK_IMPORTED_MODULE_8__["DropDownItem"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 100
+      },
+      __self: this
+    }, "Nothing to show for ", inputValue)));
+  }));
 };
 
 AutoComplete.propTypes = {};
@@ -1288,7 +1334,7 @@ var DropDown = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.wit
 var DropDownItem = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "DropDown__DropDownItem",
   componentId: "n5d97g-1"
-})(["border-bottom:1px solid ", ";background:", ";padding:1rem;transition:all 0.2s;", ";display:flex;align-items:center;border-left:10px solid ", ";img{margin-right:10px;}"], function (props) {
+})(["border-bottom:1px solid ", ";background:", ";padding:1rem;transition:all 0.2s;", ";display:flex;align-items:center;border-left:10px solid ", ";img{margin-right:10px;transform:scale(1.03);}"], function (props) {
   return props.theme.lightgrey;
 }, function (props) {
   return props.highlighted ? '#f7f7f7' : 'white';

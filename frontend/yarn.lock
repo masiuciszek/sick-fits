@@ -2503,6 +2503,11 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
 downshift@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/downshift/-/downshift-2.2.3.tgz#85187568455134e72025fbddd40bb9cf96c55eed"
@@ -5163,6 +5168,11 @@ normalize-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
+
+now@^16.4.4:
+  version "16.4.4"
+  resolved "https://registry.yarnpkg.com/now/-/now-16.4.4.tgz#6f465cd74b4981c63a002b45e7ae5e719a0561ab"
+  integrity sha512-yw4/DWcnyZ7nGv00bzZJhFOM6vFWur52esXiA2xi2Xcv/LSqVSzQ8Z7KdtfZCs0oH14+qcxDNZU+qbr5r+OXJg==
 
 npm-bundled@^1.0.1:
   version "1.0.6"

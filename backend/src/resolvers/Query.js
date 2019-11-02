@@ -44,6 +44,20 @@ const Query = {
     }
     return order;
   },
+  async orders(parent, args, { request, db }, info) {
+    const { userId } = request;
+    if (!userId) {
+      throw new Error('you must be logged in!');
+    }
+    return db.query.orders(
+      {
+        where: {
+          user: { id: userId },
+        },
+      },
+      info
+    );
+  },
 };
 
 module.exports = Query;

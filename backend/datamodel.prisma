@@ -55,4 +55,5 @@ type Order {
   user: User!
   charge: String!
   createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

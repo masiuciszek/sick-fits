@@ -248,7 +248,7 @@ const Mutations = {
     if (!cartItem) throw new Error('no Cart item found');
 
     if (cartItem.user.id !== request.userId) {
-      throw new Error('hey cheeting huuh');
+      throw new Error('hey cheating huuh');
     }
     return db.mutation.deleteCartItem(
       {
@@ -266,7 +266,7 @@ const Mutations = {
     }
     const user = await db.query.user(
       { where: { id: userId } },
-      `{id name email cart {id quantity item {title price id description  image }}}`
+      `{id name email cart {id quantity item {title price id description image largeImage }}}`
     );
     const amount = user.cart.reduce(
       (tally, cartItem) => tally + cartItem.item.price * cartItem.quantity,
@@ -278,6 +278,30 @@ const Mutations = {
       currency: 'GBP',
       source: args.token,
     });
+    const orderItems = user.cart.map(cartItem => {
+      const orderItem = {
+        ...cartItem.item,
+        quantity: cartItem.quantity,
+        user: { connect: { id: userId } },
+      };
+      delete orderItem.id;
+      return orderItem;
+    });
+    const order = await db.mutation.createOrder({
+      data: {
+        total: charge.amount,
+        charge: charge.id,
+        items: { create: orderItems },
+        user: { connect: { id: userId } },
+      },
+    });
+    const cartItemIds = user.cart.map(cartItem => cartItem.id);
+    await db.mutation.deleteManyCartItems({
+      where: {
+        id_in: cartItemIds,
+      },
+    });
+    return order;
   },
 };
 

@@ -28,15 +28,16 @@ const totalItems = cart =>
 
 const TakeMyMoney = props => {
   //
-  const handleToken = (res, createOrder) => {
+  const handleToken = async (res, createOrder) => {
     console.log(res);
-    createOrder({
+    const order = await createOrder({
       variables: {
         token: res.id,
       },
     }).catch(err => {
       alert(err.message);
     });
+    console.log(order);
   };
   return (
     <User>
@@ -50,7 +51,7 @@ const TakeMyMoney = props => {
               amount={calcTotalPrice(me.cart)}
               name="Sick Fits"
               description={`Order of ${totalItems(me.cart)}`}
-              image={me.cart[0].item && me.cart[0].item.image}
+              image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
               stripeKey="pk_test_hmXEquiVd2akJo2SU4ENOfTC00tYthNSYG"
               currency="GBP"
               email={me.email}

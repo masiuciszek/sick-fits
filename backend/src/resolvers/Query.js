@@ -27,6 +27,23 @@ const Query = {
 
     return ctx.db.query.users({}, info);
   },
+  async order(parent, args, { request, db }, info) {
+    if (!request.userId) {
+      throw new Error('Please sign in');
+    }
+    const order = await db.query.order(
+      {
+        where: { id: args.id },
+      },
+      info
+    );
+    const ownsOrder = order.user.id === request.userId;
+    const hasPermissionToSeeOrder = request.user.permissions.includes('ADMIN');
+    if (!ownsOrder || !hasPermissionToSeeOrder) {
+      throw new Error("you can't see this ");
+    }
+    return order;
+  },
 };
 
 module.exports = Query;

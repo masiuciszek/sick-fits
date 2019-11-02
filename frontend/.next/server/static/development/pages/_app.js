@@ -1484,8 +1484,9 @@ var TakeMyMoney = function TakeMyMoney(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              nprogress__WEBPACK_IMPORTED_MODULE_4___default.a.start();
               console.log(res);
-              _context.next = 3;
+              _context.next = 4;
               return createOrder({
                 variables: {
                   token: res.id
@@ -1494,11 +1495,17 @@ var TakeMyMoney = function TakeMyMoney(props) {
                 alert(err.message);
               });
 
-            case 3:
+            case 4:
               order = _context.sent;
               console.log(order);
+              next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
+                pathname: '/order',
+                query: {
+                  id: order.data.createOrder.id
+                }
+              });
 
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -1514,7 +1521,7 @@ var TakeMyMoney = function TakeMyMoney(props) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_User__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 48
     },
     __self: this
   }, function (_ref2) {
@@ -1526,7 +1533,7 @@ var TakeMyMoney = function TakeMyMoney(props) {
       }],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 50
       },
       __self: this
     }, function (createOrder) {
@@ -1543,7 +1550,7 @@ var TakeMyMoney = function TakeMyMoney(props) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 55
         },
         __self: this
       }, props.children);

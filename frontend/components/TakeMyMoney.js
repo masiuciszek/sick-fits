@@ -29,6 +29,7 @@ const totalItems = cart =>
 const TakeMyMoney = props => {
   //
   const handleToken = async (res, createOrder) => {
+    NProgress.start();
     console.log(res);
     const order = await createOrder({
       variables: {
@@ -38,6 +39,10 @@ const TakeMyMoney = props => {
       alert(err.message);
     });
     console.log(order);
+    Router.push({
+      pathname: '/order',
+      query: { id: order.data.createOrder.id },
+    });
   };
   return (
     <User>

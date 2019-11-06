@@ -80,7 +80,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
               </label>
-              <button type="submit">Sign in</button>
+              <button type="submit">Signin</button>
             </fieldset>
           </Form>
         )}

@@ -5,7 +5,7 @@ const createServer = require('./createServer');
 const db = require('./db');
 
 const server = createServer();
-
+// sad
 server.express.use(cookieParser());
 // @ts-ignore
 server.express.use((req, res, next) => {

@@ -1,0 +1,32 @@
+{
+  "title": "Marcell Ciszek Druzinski's blog about software development",
+  "titleTemplate": "%s | masiu-cd.com",
+  "description": "My name is Marcell, I share my thoughts and knowledge about software development and other technical stuff",
+  "additionalMetaTags": [
+    {"property": "author", "content": "marcell.blog"},
+    {
+      "property": "keywords",
+      "content": ""
+    }
+  ],
+  "twitter": {
+    "cardType": "summary_large_image",
+    "handle": "@masiu_cd",
+    "site": "@masiu_cd"
+  },
+  "openGraph": {
+    "type": "website",
+    "title": "My name is Marcell, I share my thoughts and knowledge about software development and other technical stuff",
+    "description": "My name is Marcell, I share my thoughts and knowledge about software development and other technical stuff",
+    "site_name": "masiu.blog",
+    "profile": {
+      "firstName": "Marcell",
+      "lastName": "Ciszek Druzysnki"
+    },
+    "images": [
+      {
+        "url": "https://res.cloudinary.com"
+      }
+    ]
+  }
+}

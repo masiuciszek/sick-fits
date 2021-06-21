@@ -1,0 +1,33 @@
+{
+  "pathPrefix": "/",
+  "keywords": [
+    "React",
+    "Software Engineer",
+    "Typescript",
+    "Jest",
+    "Rust",
+    "Endurance freak",
+    "Frontend",
+    "GraphQl",
+    "Engineering",
+    "Blog",
+    "CSS",
+    "serverless",
+    "Computer Science"
+  ],
+  "title": "Marcell Ciszek Drusynski's Blog",
+  "titleAlt": "Marcell Ciszek Drusynski | Blog",
+  "description": "Hi I'm Marcell, and this is my blog, where I share what I am learning and currently working with, like React, GraphQl,Rust,Typescript and UX ",
+  "url": "https://marcell-cd.com",
+  "siteUrl": "https://marcell-cd.com/",
+  "siteLanguage": "en",
+  "logo": "src/static/logo/logo.png",
+  "image": "https://marcell-cd.com/static/og/mmm.png",
+  "favicon": "static/favicon.ico",
+  "shortName": "Masiu_cd",
+  "author": "Marcell Ciszek Druzynski",
+  "themeColor": "#000000",
+  "backgroundColor": "#ffffff",
+  "twitter": "@masiu_cd",
+  "twitterDesc": "Marcell Ciszek Druzynski, I am a software developer that love to create things, from Gothenburg Sweden."
+}

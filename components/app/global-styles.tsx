@@ -46,6 +46,7 @@ export const GlobalStyles = () => (
         --mono: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
           monospace;
 
+        /* Colors */
         --color-text-primary: #225feb;
         --color-text-text: #212732;
         --color-text-white: #fff;
@@ -70,6 +71,8 @@ export const GlobalStyles = () => (
         --h4: 1.563rem;
         --h5: 1.25rem;
         --maxWidth: 1200px;
+        --header-height: 10rem;
+        --footer-height: 10rem;
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

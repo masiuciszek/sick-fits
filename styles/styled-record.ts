@@ -1,22 +1,3 @@
-export const elements = {
-  // Deprecated
-  background: "var(--background)",
-  headline: "var(--headline)",
-  paragraph: "var(--paragraph)",
-  paragraph2: "var(--paragraph2)",
-  button: "var(--button)",
-  buttonText: "var(--buttonText)",
-}
-export const illustrations = {
-  // // Deprecated
-  stroke: "var(--stroke)",
-  main: "var(--main)",
-  highlight: "var(--highlight)",
-  highlight2: "var(--highlight-2)",
-  secondary: "var(--secondary)",
-  tertiary: "var(--tertiary)",
-}
-
 export const colors = {
   colorTextPrimary: "var(--color-text-primary)",
   colorTextText: "var(--color-text-text)",
@@ -43,6 +24,8 @@ export const sizes = {
   h4: "var(--h4)",
   h5: "var(--h5)",
   maxWidth: "var(--maxWidth)",
+  headerHeight: "var(--header-height)",
+  footerHeight: "var(--footer-height)",
 }
 
 export const elevations = {

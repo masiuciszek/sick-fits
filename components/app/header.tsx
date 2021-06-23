@@ -4,17 +4,18 @@ import Navigation from "./nav"
 import {above, below} from "@styles/media-query"
 import Link from "next/link"
 import Cmd from "@components/icons/cmd"
-import {buttonResetStyles} from "@styles/css-helpers"
 import useTheme from "@hooks/theme"
-import {elements, elevations} from "@styles/styled-record"
 import Button from "@components/elements/button"
+import Moon from "@components/icons/moon"
+import Sun from "@components/icons/sun"
+import {colors, elevations, sizes} from "@styles/styled-record"
 
 const StyledHeader = styled.header`
   border: 2px solid red;
-  min-height: 10rem;
+  max-height: ${sizes.headerHeight};
   display: flex;
   flex-flow: row wrap;
-  background-color: ${elements.background};
+  background-color: ${colors.colorBgNavigation};
   @media ${below.mobileL} {
     flex-flow: column wrap;
     flex-direction: column-reverse;
@@ -38,8 +39,7 @@ const LogoWrapper = styled.div`
 const ButtonWrapper = styled.div`
   position: fixed;
   right: 1rem;
-  top: 3.5rem;
-
+  top: 1.5rem;
   width: 10rem;
   display: flex;
   justify-content: space-between;
@@ -66,7 +66,7 @@ const Header = () => {
         <Button>
           <Cmd />
         </Button>
-        <button onClick={handleTheme}>toggle theme</button>
+        <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
       </ButtonWrapper>
       <Navigation />
     </StyledHeader>

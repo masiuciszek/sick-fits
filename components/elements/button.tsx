@@ -5,8 +5,7 @@ import {elevations} from "@styles/styled-record"
 
 const styles = css`
   ${buttonResetStyles};
-  box-shadow: ${elevations.shadow2Xl};
-  border: 1px solid #000;
+  box-shadow: ${elevations.shadowLg};
   width: 4rem;
 `
 

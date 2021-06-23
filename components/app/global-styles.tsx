@@ -46,18 +46,22 @@ export const GlobalStyles = () => (
         --mono: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
           monospace;
 
-        /* Colors */
-        --light-blue: #9eddf8;
-        --white: #fffffe;
-        --grey: #718096;
-        --grey-light: #cbd5e0;
-        --dark-blue: #384357;
-        --blue: #b8c1ec;
-        --dark: #0e182a;
-        --dark-secondary: #121629;
-        --dark-third: #232946;
-        --pink: #eebbc3;
-        --pink-darker: #d4939d;
+        --color-text-primary: #225feb;
+        --color-text-text: #212732;
+        --color-text-white: #fff;
+        --color-bg-background: #fff;
+        --color-bg-navigation: hsla(0, 0%, 100%, 0.9);
+        --color-bg-black: #0e182a;
+        --color-gray-100: #f0f2f7;
+        --color-gray-200: #e2e7ed;
+        --color-gray-300: #d8dee6;
+        --color-gray-400: #c3ced8;
+        --color-gray-500: #a0aec0;
+        --color-gray-600: #718096;
+        --color-gray-700: #4a5568;
+        --color-gray-800: #293448;
+        --color-gray-900: #1a202c;
+        --color-react: #1e75d9;
 
         /* sizes */
         --h1: 3.052rem;
@@ -66,22 +70,6 @@ export const GlobalStyles = () => (
         --h4: 1.563rem;
         --h5: 1.25rem;
         --maxWidth: 1200px;
-
-        /* elements */
-        --background: var(--dark);
-        --headline: var(--white);
-        --paragraph: var(--white);
-        --paragraph2: var(--blue);
-        --button: var(--pink);
-        --buttonText: var(--dark);
-
-        /* Illustration */
-        --stroke: var(--dark-secondary);
-        --main: var(--blue);
-        --highlight: var(--pink);
-        --highlight-2: var(--pink-darker);
-        --secondary: var(--white);
-        --tertiary: var(--pink);
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -110,43 +98,45 @@ export const GlobalStyles = () => (
         box-sizing: border-box;
         font-weight: normal;
         line-height: 1.75;
-        color: var(--paragraph);
-        background-color: var(--background);
+        color: var(--color-text-text);
+        background-color: var(--color-bg-background);
       }
 
       body[data-theme="light"] {
-        /* elements */
-        --background: var(--white);
-        --headline: var(--dark-secondary);
-        --paragraph: var(--dark-third);
-        --paragraph2: var(--blue);
-        --button: var(--dark-secondary);
-        --buttonText: var(--pink);
-
-        /* Illustration */
-        --stroke: var(--dark-secondary);
-        --main: var(--blue);
-        --highlight: var(--pink);
-        --highlight-2: var(--pink-darker);
-        --secondary: var(--white);
-        --tertiary: var(--pink);
+        --color-text-primary: #225feb;
+        --color-text-text: #212732;
+        --color-text-white: #fff;
+        --color-bg-background: #fff;
+        --color-bg-navigation: hsla(0, 0%, 100%, 0.9);
+        --color-bg-black: #0e182a;
+        --color-gray-100: #f0f2f7;
+        --color-gray-200: #e2e7ed;
+        --color-gray-300: #d8dee6;
+        --color-gray-400: #c3ced8;
+        --color-gray-500: #a0aec0;
+        --color-gray-600: #718096;
+        --color-gray-700: #4a5568;
+        --color-gray-800: #293448;
+        --color-gray-900: #1a202c;
+        --color-react: #1e75d9;
       }
       body[data-theme="dark"] {
-        /* elements */
-        --background: var(--dark);
-        --headline: var(--white);
-        --paragraph: var(--white);
-        --paragraph2: var(--blue);
-        --button: var(--pink);
-        --buttonText: var(--dark);
-
-        /* Illustration */
-        --stroke: var(--dark-secondary);
-        --main: var(--blue);
-        --highlight: var(--pink);
-        --highlight-2: var(--pink-darker);
-        --secondary: var(--white);
-        --tertiary: var(--pink);
+        --color-text-primary: #81a7ff;
+        --color-text-text: #fff;
+        --color-text-white: #fff;
+        --color-bg-background: #0e182a;
+        --color-bg-navigation: rgba(14, 24, 42, 0.9);
+        --color-bg-black: #0e182a;
+        --color-gray-100: #132035;
+        --color-gray-200: #222f44;
+        --color-gray-300: #384357;
+        --color-gray-400: #718096;
+        --color-gray-500: #a0aec0;
+        --color-gray-600: #cbd5e0;
+        --color-gray-700: #e2e8f0;
+        --color-gray-800: #edf2f7;
+        --color-gray-900: #f7fafc;
+        --color-react: #9eddf8;
       }
 
       h1,

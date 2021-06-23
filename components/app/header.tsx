@@ -7,6 +7,7 @@ import Cmd from "@components/icons/cmd"
 import {buttonResetStyles} from "@styles/css-helpers"
 import useTheme from "@hooks/theme"
 import {elements, elevations} from "@styles/styled-record"
+import Button from "@components/elements/button"
 
 const StyledHeader = styled.header`
   border: 2px solid red;
@@ -38,14 +39,11 @@ const ButtonWrapper = styled.div`
   position: fixed;
   right: 1rem;
   top: 3.5rem;
-  /* border: 2px solid red; */
-  width: 8rem;
+
+  width: 10rem;
   display: flex;
   justify-content: space-between;
-  /* box-shadow: ${elevations.shadow2Xl}; */
-  button {
-    ${buttonResetStyles};
-  }
+  box-shadow: ${elevations.shadow2Xl};
 
   @media ${below.mobileL} {
     position: static;
@@ -65,9 +63,9 @@ const Header = () => {
         </Link>
       </LogoWrapper>
       <ButtonWrapper>
-        <button>
+        <Button>
           <Cmd />
-        </button>
+        </Button>
         <button onClick={handleTheme}>toggle theme</button>
       </ButtonWrapper>
       <Navigation />

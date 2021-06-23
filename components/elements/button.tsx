@@ -1,17 +1,22 @@
+import {FC} from "react"
 import {css, SerializedStyles} from "@emotion/react"
 import {buttonResetStyles} from "@styles/css-helpers"
+import {elevations} from "@styles/styled-record"
 
 const styles = css`
-  ${buttonResetStyles}
+  ${buttonResetStyles};
+  box-shadow: ${elevations.shadow2Xl};
+  border: 1px solid #000;
+  width: 4rem;
 `
 
 interface Props {
   incomingStyles?: SerializedStyles
-  text: string
+  text?: string
   onClick?: () => void
 }
 
-const Button = ({incomingStyles, text, onClick}: Props) => {
+const Button: FC<Props> = ({incomingStyles, text, onClick, children}) => {
   return (
     <button
       onClick={onClick}
@@ -21,7 +26,7 @@ const Button = ({incomingStyles, text, onClick}: Props) => {
         ${incomingStyles};
       `}
     >
-      {text}
+      {text !== undefined ? text : children}
     </button>
   )
 }

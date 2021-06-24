@@ -3,10 +3,10 @@ import {motion} from "framer-motion"
 
 const Moon = () => (
   <motion.svg
-    initial={{opacity: 0}}
-    animate={{opacity: 1}}
-    exit={{opacity: 0}}
-    transition={{delay: 0.2}}
+    initial={{opacity: 0, rotate: -5, x: 20}}
+    animate={{opacity: 1, rotate: 0, x: 0}}
+    exit={{opacity: 0, rotate: 5, x: -20}}
+    transition={{delay: 0.25, stiffness: 50}}
     xmlns="http://www.w3.org/2000/svg"
     width="30"
     height="30"

@@ -1,9 +1,5 @@
 [
   {
-    "name": "home",
-    "path": "/"
-  },
-  {
     "name": "blog",
     "path": "/blog"
   },

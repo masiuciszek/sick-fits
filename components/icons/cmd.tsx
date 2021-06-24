@@ -3,7 +3,10 @@ import {motion} from "framer-motion"
 
 const Cmd = () => (
   <motion.svg
-    whileHover={{path: "0 0 29 29"}}
+    initial={{opacity: 0, rotate: -5, x: 20}}
+    animate={{opacity: 1, rotate: 0, x: 0}}
+    exit={{opacity: 0, rotate: 5, x: -20}}
+    transition={{delay: 0.25, stiffness: 50}}
     xmlns="http://www.w3.org/2000/svg"
     width="30"
     height="30"
@@ -15,12 +18,7 @@ const Cmd = () => (
     strokeLinejoin="round"
     className="feather feather-command"
   >
-    <motion.path
-      whileHover={{
-        d: "M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z",
-      }}
-      d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
-    ></motion.path>
+    <motion.path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></motion.path>
   </motion.svg>
 )
 

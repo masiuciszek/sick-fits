@@ -1,8 +1,9 @@
+import Intro from "@components/home/intro"
 import {Fragment} from "react"
 
 const Home = () => (
   <Fragment>
-    <h1>Hello World</h1>
+    <Intro />
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit delectus illum
       perspiciatis consequuntur est totam voluptatibus quae fuga maiores ipsum omnis doloremque

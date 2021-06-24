@@ -43,7 +43,7 @@ const ButtonWrapper = styled.div`
   width: 10rem;
   display: flex;
   justify-content: space-between;
-  box-shadow: ${elevations.shadow2Xl};
+  /* box-shadow: ${elevations.shadow2Xl}; */
 
   @media ${below.mobileL} {
     position: static;

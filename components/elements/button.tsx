@@ -2,10 +2,10 @@ import {FC} from "react"
 import {css, SerializedStyles} from "@emotion/react"
 import {buttonResetStyles} from "@styles/css-helpers"
 import {elevations} from "@styles/styled-record"
+import {motion} from "framer-motion"
 
 const styles = css`
   ${buttonResetStyles};
-  box-shadow: ${elevations.shadowLg};
   width: 4rem;
 `
 
@@ -13,20 +13,23 @@ interface Props {
   incomingStyles?: SerializedStyles
   text?: string
   onClick?: () => void
+  config?: Record<string, string | boolean | number | Record<string, string | boolean | number>>
 }
 
-const Button: FC<Props> = ({incomingStyles, text, onClick, children}) => {
+const Button: FC<Props> = ({incomingStyles, text, onClick, children, config}) => {
   return (
-    <button
+    <motion.button
+      whileHover={{boxShadow: elevations.shadowLg}}
       onClick={onClick}
       type="button"
       css={css`
         ${styles};
         ${incomingStyles};
       `}
+      {...config}
     >
       {text !== undefined ? text : children}
-    </button>
+    </motion.button>
   )
 }
 

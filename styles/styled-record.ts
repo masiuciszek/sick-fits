@@ -3,6 +3,7 @@ export const colors = {
   colorTextText: "var(--color-text-text)",
   colorTextWhite: "var(--color-text-white)",
   colorBgBackground: "var(--color-bg-background)",
+  colorBgOverlay: "var(--color-bg-overlay)",
   colorBgNavigation: "var(--color-bg-navigation)",
   colorBgBlack: "var(color--bg-black)",
   colorGray100: "var(--color-gray-100)",

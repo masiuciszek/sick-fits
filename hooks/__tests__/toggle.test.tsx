@@ -2,7 +2,7 @@ import {renderHook, act} from "@testing-library/react-hooks"
 import useToggle from "../toggle"
 
 describe("useToggle", () => {
-  test("should toggle from false to true in a expected wau", () => {
+  test("should toggle from false to true in a expected way", () => {
     const {result} = renderHook(() => useToggle())
 
     // initialState is set to false

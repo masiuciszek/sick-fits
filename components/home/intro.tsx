@@ -6,6 +6,7 @@ import Highlighter from "@components/common/highlighter"
 import Wave from "@components/icons/wave"
 import Link from "next/link"
 import styled from "@emotion/styled"
+import Twitter from "@components/icons/twitter"
 
 const styles = css`
   background-color: ${colors.colorBgBackground};
@@ -22,10 +23,18 @@ const styles = css`
 `
 
 const LinkWrapper = styled.div`
+  max-width: 25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   a {
     color: ${colors.colorTextPrimary};
-    display: inline-block;
+    display: flex;
     position: relative;
+    align-items: center;
+    svg {
+      margin-left: 0.3rem;
+    }
     &:after {
       transition: 400ms ease-in-out width;
       content: "";
@@ -62,6 +71,9 @@ const Intro = () => {
       </h1>
       <LinkWrapper>
         <Link href="/about">About me &#8599; </Link>
+        <a href="https://twitter.com/masiu_cd">
+          @masiu_cd <Twitter />
+        </a>
       </LinkWrapper>
     </Title>
   )

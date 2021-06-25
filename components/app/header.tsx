@@ -1,3 +1,5 @@
+import {Fragment} from "react"
+import ReactDOM from "react-dom"
 import styled from "@emotion/styled"
 import MarcellLogo from "@components/icons/marcell-logo"
 import Navigation from "./nav"
@@ -9,6 +11,10 @@ import Button from "@components/elements/button"
 import Moon from "@components/icons/moon"
 import Sun from "@components/icons/sun"
 import {colors, elevations, sizes} from "@styles/styled-record"
+import useToggle from "@hooks/toggle"
+import useMediaQuery from "@hooks/media-query"
+import {AnimatePresence, motion} from "framer-motion"
+import {css} from "@emotion/react"
 
 const StyledHeader = styled.header`
   border: 2px solid red;
@@ -43,8 +49,7 @@ const ButtonWrapper = styled.div`
   width: 10rem;
   display: flex;
   justify-content: space-between;
-  /* box-shadow: ${elevations.shadow2Xl}; */
-
+  z-index: 10;
   @media ${below.mobileL} {
     position: static;
   }
@@ -52,25 +57,61 @@ const ButtonWrapper = styled.div`
 
 const Header = () => {
   const {storedTheme, handleTheme} = useTheme()
+  const isAboveTablet = useMediaQuery(above.tablet)
+  const {state: showMenu, toggle: toggleMenu} = useToggle()
 
   return (
-    <StyledHeader>
-      <LogoWrapper>
-        <Link href="/">
-          <a>
-            <MarcellLogo />
-          </a>
-        </Link>
-      </LogoWrapper>
-      <ButtonWrapper>
-        <Button>
-          <Cmd />
-        </Button>
-        <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
-      </ButtonWrapper>
-      <Navigation />
-    </StyledHeader>
+    <Fragment>
+      <StyledHeader>
+        <LogoWrapper>
+          <Link href="/">
+            <a>
+              <MarcellLogo />
+            </a>
+          </Link>
+        </LogoWrapper>
+        <ButtonWrapper>
+          <Button onClick={toggleMenu}>
+            <Cmd />
+          </Button>
+          <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
+        </ButtonWrapper>
+        {isAboveTablet && <Navigation />}
+      </StyledHeader>
+      <AnimatePresence>{showMenu && <MenuDialog />}</AnimatePresence>
+    </Fragment>
   )
 }
 
 export default Header
+
+const Overlay = styled(motion.div)`
+  position: fixed;
+  background-color: ${colors.colorBgOverlay};
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  outline: none;
+`
+
+function MenuDialog() {
+  return ReactDOM.createPortal(
+    <Overlay
+      data-testid="components-app-MenuDialog"
+      role="dialog"
+      tabIndex={-1}
+      aria-model="true"
+      aria-label="search"
+      initial={{backgroundColor: colors.colorBgBackground}}
+      animate={{backgroundColor: colors.colorBgOverlay}}
+      exit={{backgroundColor: colors.colorBgBackground}}
+    >
+      <aside>
+        <h1>hello</h1>
+      </aside>
+    </Overlay>,
+    document.body,
+  )
+}

@@ -5,8 +5,6 @@ import Link from "next/link"
 import routes from "../../data/routes.json"
 import {css} from "@emotion/react"
 import {pxToRem} from "@styles/css-helpers"
-import useMediaQuery from "@hooks/media-query"
-import {above} from "@styles/media-query"
 
 const Nav = styled.nav`
   display: flex;
@@ -46,25 +44,23 @@ const getActiveLink = (pathName: string, routerPathName: string) => pathName ===
 
 const Navigation = (): JSX.Element => {
   const router = useRouter()
-  const aboveTablet = useMediaQuery(above.tablet)
+
   return (
     <Nav>
-      {aboveTablet && (
-        <NavList>
-          {routes.map(({name, path}) => (
-            <li
-              key={name}
-              css={css`
-                ${listItemStyles(getActiveLink(path, router.pathname))};
-              `}
-            >
-              <Link href={path}>
-                <a>{name}</a>
-              </Link>
-            </li>
-          ))}
-        </NavList>
-      )}
+      <NavList>
+        {routes.map(({name, path}) => (
+          <li
+            key={name}
+            css={css`
+              ${listItemStyles(getActiveLink(path, router.pathname))};
+            `}
+          >
+            <Link href={path}>
+              <a>{name}</a>
+            </Link>
+          </li>
+        ))}
+      </NavList>
     </Nav>
   )
 }

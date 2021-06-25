@@ -52,7 +52,7 @@ export const GlobalStyles = () => (
         --color-text-white: #fff;
         --color-bg-background: hsla(0, 100%, 100%, 1);
         --color-bg-navigation: hsla(0, 0%, 100%, 0.9);
-        --color-bg-overlay: hsla(0, 0%, 100%, 0.7);
+        --color-bg-overlay: hsla(0, 0%, 100%, 0.8);
         --color-bg-black: #0e182a;
         --color-gray-100: #f0f2f7;
         --color-gray-200: #e2e7ed;
@@ -74,6 +74,13 @@ export const GlobalStyles = () => (
         --maxWidth: 1200px;
         --header-height: 10rem;
         --footer-height: 10rem;
+
+        /* border-radius */
+        --border-radius-s: 3px;
+        --border-radius-m: 4px;
+        --border-radius-l: 5px;
+        --border-radius-xl: 6px;
+        --border-radius-2xl: 8px;
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -112,7 +119,7 @@ export const GlobalStyles = () => (
         --color-text-white: #fff;
         --color-bg-background: hsla(0, 100%, 100%, 1);
         --color-bg-navigation: hsla(0, 0%, 100%, 0.9);
-        --color-bg-overlay: hsla(0, 0%, 100%, 0.7);
+        --color-bg-overlay: hsla(0, 0%, 100%, 0.8);
         --color-bg-black: #0e182a;
         --color-gray-100: #f0f2f7;
         --color-gray-200: #e2e7ed;
@@ -131,7 +138,7 @@ export const GlobalStyles = () => (
         --color-text-white: #fff;
         --color-bg-background: hsla(219, 50%, 11%, 1);
         --color-bg-navigation: hsla(219, 50%, 11%, 0.9);
-        --color-bg-overlay: hsla(219, 50%, 11%, 0.7);
+        --color-bg-overlay: hsla(219, 50%, 11%, 0.8);
         --color-bg-black: #0e182a;
         --color-gray-100: #132035;
         --color-gray-200: #222f44;

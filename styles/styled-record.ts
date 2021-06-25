@@ -39,3 +39,11 @@ export const elevations = {
   shadow3Xl: "var(--shadow-3xl)",
   shadowInner: "var(--shadow-inner)",
 }
+
+export const borderRadius = {
+  borderRadiusS: "var(--border-radius-s)",
+  borderRadiusM: "var(--border-radius-m)",
+  borderRadiusL: "var(--border-radius-l)",
+  borderRadiusXL: "var(--border-radius-xl)",
+  borderRadius2XL: "var(--border-radius-2xl)",
+}

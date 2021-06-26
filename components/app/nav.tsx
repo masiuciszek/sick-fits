@@ -21,6 +21,23 @@ const NavList = styled.ul`
   align-items: center;
 `
 const listItemStyles = (active: boolean) => css`
+  position: relative;
+  &:after {
+    content: "";
+    background-color: ${colors.colorTextPrimary};
+    position: absolute;
+    transition: 200ms linear width;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+  }
+  &:hover {
+    :after {
+      width: 100%;
+    }
+  }
+
   a {
     color: ${colors.colorTextText};
     display: inline-block;

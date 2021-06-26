@@ -5,7 +5,7 @@ import {motion} from "framer-motion"
 import {above} from "@styles/media-query"
 import {pxToRem} from "@styles/css-helpers"
 import useOnClickOutside from "@hooks/click-outside"
-import {useRef} from "react"
+import React, {useRef} from "react"
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -27,6 +27,8 @@ const Body = styled(motion.section)`
   transform: translateX(-50%);
   border: 2px solid ${colors.colorHighlight};
   padding: 0.5rem;
+  background-color: ${colors.colorTextText};
+  color: ${colors.colorBgBackground};
   @media ${above.tablet} {
     width: ${pxToRem(650)};
     transform: translateX(-50%);
@@ -57,6 +59,35 @@ interface Props {
   closeMenu: () => void
 }
 
+const Form = styled.form`
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+`
+const Label = styled.label`
+  width: 90%;
+`
+
+const Input = styled.input`
+  width: 100%;
+  height: 2.5rem;
+  border: 2px solid ${colors.colorBgBlack};
+  border-radius: ${borderRadius.borderRadiusM};
+  padding-left: 0.5rem;
+  outline: none;
+  font-size: 1.2rem;
+  &::placeholder {
+    opacity: 0.7;
+    font-size: 1.1rem;
+  }
+  &:focus {
+    border-color: ${colors.colorTextPrimary};
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+`
+
 const MenuDialog = ({closeMenu}: Props) => {
   const ref = useRef(null)
   useOnClickOutside(ref, closeMenu)
@@ -82,7 +113,17 @@ const MenuDialog = ({closeMenu}: Props) => {
           duration: 0.2,
         }}
       >
-        <h1>hello</h1>
+        <Form>
+          <Label htmlFor="blog-post-search">
+            <Input
+              autoComplete="off"
+              type="search"
+              placeholder="search for a blog post"
+              id="blog-post-search"
+              name="search"
+            />
+          </Label>
+        </Form>
       </Body>
     </Overlay>,
     document.body,

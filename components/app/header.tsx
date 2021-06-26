@@ -13,7 +13,7 @@ import Button from "@components/elements/button"
 import {colors, sizes} from "@styles/styled-record"
 import useToggle from "@hooks/toggle"
 import useMediaQuery from "@hooks/media-query"
-import MenuDialog from "@components/menu/menu-dialog"
+// import MenuDialog from "@components/menu/menu-dialog"
 import AnimateWrapper from "@components/common/animate-wrapper"
 import Tooltip from "@components/common/tooltip"
 import dynamic from "next/dynamic"
@@ -22,6 +22,7 @@ import {css} from "@emotion/react"
 
 const Sun = dynamic(() => import("../icons/sun"), {ssr: true})
 const Moon = dynamic(() => import("../icons/moon"), {ssr: true})
+const MenuDialog = dynamic(() => import("../menu/menu-dialog"), {ssr: true})
 
 const StyledHeader = styled.header`
   max-height: ${sizes.headerHeight};
@@ -56,11 +57,20 @@ const Header = () => {
       <StyledHeader>
         <HeaderContentContainer>
           <LogoWrapper>
-            <Link href="/">
-              <a>
-                <MarcellLogo />
-              </a>
-            </Link>
+            <Tooltip
+              title="home"
+              ariaLabel="home page"
+              incomingStyles={css`
+                z-index: 1;
+                left: 5%;
+              `}
+            >
+              <Link href="/">
+                <a>
+                  <MarcellLogo />
+                </a>
+              </Link>
+            </Tooltip>
           </LogoWrapper>
           {isAboveTablet && <Navigation />}
           <ButtonWrapper

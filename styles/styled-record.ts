@@ -5,7 +5,7 @@ export const colors = {
   colorBgBackground: "var(--color-bg-background)",
   colorBgOverlay: "var(--color-bg-overlay)",
   colorBgNavigation: "var(--color-bg-navigation)",
-  colorBgBlack: "var(color--bg-black)",
+  colorBgBlack: "var(--color-bg-black)",
   colorGray100: "var(--color-gray-100)",
   colorGray200: "var(--color-gray-200)",
   colorGray300: "var(--color-gray-300)",
@@ -46,4 +46,9 @@ export const borderRadius = {
   borderRadiusL: "var(--border-radius-l)",
   borderRadiusXL: "var(--border-radius-xl)",
   borderRadius2XL: "var(--border-radius-2xl)",
+}
+
+export const fonts = {
+  radnika: "var(--radnika)",
+  operaorMono: "var(--mono)",
 }

@@ -29,7 +29,7 @@ const Tooltip: React.FC<Props> = ({title, ariaLabel, children, incomingStyles}) 
           exit={{opacity: 0, y: -10, scale: 0.5}}
           css={css`
             position: absolute;
-            top: -25%;
+            top: 8%;
             left: -25%;
             font-size: ${pxToRem(14)};
             pointer-events: none;

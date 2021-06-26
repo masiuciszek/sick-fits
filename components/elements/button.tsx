@@ -1,7 +1,6 @@
 import {FC} from "react"
 import {css, SerializedStyles} from "@emotion/react"
 import {buttonResetStyles} from "@styles/css-helpers"
-import {elevations} from "@styles/styled-record"
 import {motion} from "framer-motion"
 
 const styles = css`

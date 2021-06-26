@@ -17,14 +17,14 @@ const NavList = styled.ul`
   border: 2px solid red;
   padding: 0.5rem;
   flex: 1;
-  margin-top: auto;
+  height: 100%;
+  align-items: center;
 `
 const listItemStyles = (active: boolean) => css`
   a {
     color: ${colors.colorTextText};
     display: inline-block;
     position: relative;
-
     z-index: 1;
     &:after {
       content: "";

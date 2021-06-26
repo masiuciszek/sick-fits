@@ -3,7 +3,7 @@ import {useHotkeys} from "react-hotkeys-hook"
 import styled from "@emotion/styled"
 import MarcellLogo from "@components/icons/marcell-logo"
 import Navigation from "./nav"
-import {above, below} from "@styles/media-query"
+import {above} from "@styles/media-query"
 import Link from "next/link"
 import Cmd from "@components/icons/cmd"
 import useTheme, {ThemeValue} from "@hooks/theme"
@@ -24,20 +24,16 @@ const Sun = dynamic(() => import("../icons/sun"), {ssr: true})
 const Moon = dynamic(() => import("../icons/moon"), {ssr: true})
 
 const StyledHeader = styled.header`
-  border: 2px solid red;
   max-height: ${sizes.headerHeight};
-  display: flex;
-  flex-flow: row wrap;
   background-color: ${colors.colorBgNavigation};
-  @media ${below.mobileL} {
-    flex-flow: column wrap;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-  }
+`
+const HeaderContentContainer = styled.aside`
+  display: grid;
+  max-width: ${sizes.maxWidth};
+  margin: 0 auto;
+  grid-template-columns: 1fr;
   @media ${above.tablet} {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `
 
@@ -58,20 +54,22 @@ const Header = () => {
   return (
     <Fragment>
       <StyledHeader>
-        <LogoWrapper>
-          <Link href="/">
-            <a>
-              <MarcellLogo />
-            </a>
-          </Link>
-        </LogoWrapper>
-        <ButtonWrapper
-          showMenu={showMenu}
-          openMenu={openMenu}
-          handleTheme={handleTheme}
-          storedTheme={storedTheme}
-        />
-        {isAboveTablet && <Navigation />}
+        <HeaderContentContainer>
+          <LogoWrapper>
+            <Link href="/">
+              <a>
+                <MarcellLogo />
+              </a>
+            </Link>
+          </LogoWrapper>
+          {isAboveTablet && <Navigation />}
+          <ButtonWrapper
+            showMenu={showMenu}
+            openMenu={openMenu}
+            handleTheme={handleTheme}
+            storedTheme={storedTheme}
+          />
+        </HeaderContentContainer>
       </StyledHeader>
 
       <AnimateWrapper isOn={showMenu}>
@@ -84,19 +82,10 @@ const Header = () => {
 export default Header
 
 const ButtonWrapperStyles = styled.div`
-  position: fixed;
-  right: 3rem;
-  top: 1.2rem;
-  width: 8rem;
+  border: 2px solid red;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   z-index: 2;
-  @media ${below.mobileL} {
-    position: static;
-  }
-  button {
-    position: relative;
-  }
 `
 interface ButtonWrapperProps {
   showMenu: boolean

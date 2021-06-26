@@ -6,7 +6,7 @@ import Navigation from "./nav"
 import {above, below} from "@styles/media-query"
 import Link from "next/link"
 import Cmd from "@components/icons/cmd"
-import useTheme from "@hooks/theme"
+import useTheme, {ThemeValue} from "@hooks/theme"
 import Button from "@components/elements/button"
 import Moon from "@components/icons/moon"
 import Sun from "@components/icons/sun"
@@ -15,6 +15,7 @@ import useToggle from "@hooks/toggle"
 import useMediaQuery from "@hooks/media-query"
 import MenuDialog from "@components/menu/menu-dialog"
 import AnimateWrapper from "@components/common/animate-wrapper"
+import Tooltip from "@components/common/tooltip"
 
 const StyledHeader = styled.header`
   border: 2px solid red;
@@ -42,23 +43,11 @@ const LogoWrapper = styled.div`
   border: 2px solid red;
 `
 
-const ButtonWrapper = styled.div`
-  position: fixed;
-  right: 1rem;
-  top: 1.5rem;
-  width: 10rem;
-  display: flex;
-  justify-content: space-between;
-  z-index: 10;
-  @media ${below.mobileL} {
-    position: static;
-  }
-`
-
 const Header = () => {
   const {storedTheme, handleTheme} = useTheme()
   const isAboveTablet = useMediaQuery(above.tablet)
   const {state: showMenu, toggle: toggleMenu} = useToggle()
+
   useHotkeys("ctrl+k", toggleMenu)
 
   return (
@@ -71,12 +60,12 @@ const Header = () => {
             </a>
           </Link>
         </LogoWrapper>
-        <ButtonWrapper>
-          <Button onClick={toggleMenu}>
-            <Cmd />
-          </Button>
-          <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
-        </ButtonWrapper>
+        <ButtonWrapper
+          showMenu={showMenu}
+          toggleMenu={toggleMenu}
+          handleTheme={handleTheme}
+          storedTheme={storedTheme}
+        />
         {isAboveTablet && <Navigation />}
       </StyledHeader>
 
@@ -88,3 +77,43 @@ const Header = () => {
 }
 
 export default Header
+
+const ButtonWrapperStyles = styled.div`
+  position: fixed;
+  right: 3rem;
+  top: 1.2rem;
+  width: 8rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  @media ${below.mobileL} {
+    position: static;
+  }
+  button {
+    position: relative;
+  }
+`
+interface ButtonWrapperProps {
+  showMenu: boolean
+  toggleMenu: () => void
+  storedTheme: ThemeValue
+  handleTheme: () => void
+}
+
+function ButtonWrapper({showMenu, toggleMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
+  return (
+    <ButtonWrapperStyles>
+      <Tooltip title="ctr+k" ariaLabel={showMenu ? "close menu" : "open menu"}>
+        <Button onClick={toggleMenu}>
+          <Cmd />
+        </Button>
+      </Tooltip>
+      <Tooltip
+        title={`${storedTheme === "dark" ? "light" : "dark"}`}
+        ariaLabel={`switch theme to ${storedTheme === "dark" ? "light" : "dark"}`}
+      >
+        <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
+      </Tooltip>
+    </ButtonWrapperStyles>
+  )
+}

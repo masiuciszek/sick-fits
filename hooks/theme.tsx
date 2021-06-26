@@ -1,7 +1,7 @@
 import {useEffect} from "react"
 import useLocalStorage from "./local-storage"
 
-type ThemeValue = "dark" | "light"
+export type ThemeValue = "dark" | "light"
 
 const useTheme = (themeKey = "theme", themeValue: ThemeValue = "light") => {
   const {storedValue, setValue} = useLocalStorage(themeKey, themeValue)

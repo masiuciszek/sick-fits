@@ -10,7 +10,7 @@ describe("useToggle", () => {
 
     // we now change the state to true
     act(() => {
-      result.current.setToTrue()
+      result.current.toTrue()
     })
 
     // state should be true
@@ -18,7 +18,7 @@ describe("useToggle", () => {
 
     // we set it back to false
     act(() => {
-      result.current.setToFalse()
+      result.current.toFalse()
     })
 
     // state should be false

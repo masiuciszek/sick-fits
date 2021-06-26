@@ -1,5 +1,5 @@
-import React, {Fragment} from "react"
-
+import {Fragment} from "react"
+import {useHotkeys} from "react-hotkeys-hook"
 import styled from "@emotion/styled"
 import MarcellLogo from "@components/icons/marcell-logo"
 import Navigation from "./nav"
@@ -59,6 +59,7 @@ const Header = () => {
   const {storedTheme, handleTheme} = useTheme()
   const isAboveTablet = useMediaQuery(above.tablet)
   const {state: showMenu, toggle: toggleMenu} = useToggle()
+  useHotkeys("ctrl+k", toggleMenu)
 
   return (
     <Fragment>

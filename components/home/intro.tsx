@@ -64,9 +64,10 @@ const Intro = () => {
         <span>
           {" "}
           Here where I share my thoughts, ideas, and experience as a software engineer and
-          everything that is my main focus right now, like <Highlighter>React</Highlighter>,
-          <Highlighter>Typescript</Highlighter>, <Highlighter>GraphQL</Highlighter> and{" "}
-          <Highlighter>Rust</Highlighter>.
+          everything that interests me that I would love to share. Topics like{" "}
+          <Highlighter>computer science</Highlighter>, <Highlighter>React</Highlighter>,{" "}
+          <Highlighter>software engineering</Highlighter>, and a good{" "}
+          <Highlighter>user experience</Highlighter> are close to my heart.
         </span>
       </h1>
       <LinkWrapper>

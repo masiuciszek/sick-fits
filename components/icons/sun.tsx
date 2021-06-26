@@ -14,7 +14,7 @@ const Sun = () => (
     viewBox="0 0 256 256"
   >
     <rect width="256" height="256" fill="none"></rect>
-    <circle
+    <motion.circle
       cx="128"
       cy="128"
       r="60"
@@ -23,7 +23,7 @@ const Sun = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
-    ></circle>
+    ></motion.circle>
     <line
       x1="128"
       y1="36"

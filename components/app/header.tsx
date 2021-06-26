@@ -8,14 +8,20 @@ import Link from "next/link"
 import Cmd from "@components/icons/cmd"
 import useTheme, {ThemeValue} from "@hooks/theme"
 import Button from "@components/elements/button"
-import Moon from "@components/icons/moon"
-import Sun from "@components/icons/sun"
+// import Moon from "@components/icons/moon"
+// import Sun from "@components/icons/sun"
 import {colors, sizes} from "@styles/styled-record"
 import useToggle from "@hooks/toggle"
 import useMediaQuery from "@hooks/media-query"
 import MenuDialog from "@components/menu/menu-dialog"
 import AnimateWrapper from "@components/common/animate-wrapper"
 import Tooltip from "@components/common/tooltip"
+import dynamic from "next/dynamic"
+import useHasMounted from "@hooks/has-mounted"
+import {css} from "@emotion/react"
+
+const Sun = dynamic(() => import("../icons/sun"), {ssr: true})
+const Moon = dynamic(() => import("../icons/moon"), {ssr: true})
 
 const StyledHeader = styled.header`
   border: 2px solid red;
@@ -46,8 +52,7 @@ const LogoWrapper = styled.div`
 const Header = () => {
   const {storedTheme, handleTheme} = useTheme()
   const isAboveTablet = useMediaQuery(above.tablet)
-  const {state: showMenu, toggle: toggleMenu} = useToggle()
-
+  const {state: showMenu, toTrue: openMenu, toFalse: closeMenu, toggle: toggleMenu} = useToggle()
   useHotkeys("ctrl+k", toggleMenu)
 
   return (
@@ -62,7 +67,7 @@ const Header = () => {
         </LogoWrapper>
         <ButtonWrapper
           showMenu={showMenu}
-          toggleMenu={toggleMenu}
+          openMenu={openMenu}
           handleTheme={handleTheme}
           storedTheme={storedTheme}
         />
@@ -70,7 +75,7 @@ const Header = () => {
       </StyledHeader>
 
       <AnimateWrapper isOn={showMenu}>
-        <MenuDialog />
+        <MenuDialog closeMenu={closeMenu} />
       </AnimateWrapper>
     </Fragment>
   )
@@ -85,7 +90,7 @@ const ButtonWrapperStyles = styled.div`
   width: 8rem;
   display: flex;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 2;
   @media ${below.mobileL} {
     position: static;
   }
@@ -95,16 +100,23 @@ const ButtonWrapperStyles = styled.div`
 `
 interface ButtonWrapperProps {
   showMenu: boolean
-  toggleMenu: () => void
+  openMenu: () => void
   storedTheme: ThemeValue
   handleTheme: () => void
 }
 
-function ButtonWrapper({showMenu, toggleMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
+function ButtonWrapper({showMenu, openMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
+  const hasMounted = useHasMounted()
   return (
     <ButtonWrapperStyles>
-      <Tooltip title="ctr+k" ariaLabel={showMenu ? "close menu" : "open menu"}>
-        <Button onClick={toggleMenu}>
+      <Tooltip
+        title="ctr+k"
+        ariaLabel={showMenu ? "close menu" : "open menu"}
+        incomingStyles={css`
+          left: -45%;
+        `}
+      >
+        <Button onClick={openMenu}>
           <Cmd />
         </Button>
       </Tooltip>
@@ -112,7 +124,15 @@ function ButtonWrapper({showMenu, toggleMenu, storedTheme, handleTheme}: ButtonW
         title={`${storedTheme === "dark" ? "light" : "dark"}`}
         ariaLabel={`switch theme to ${storedTheme === "dark" ? "light" : "dark"}`}
       >
-        <Button onClick={handleTheme}>{storedTheme === "dark" ? <Sun /> : <Moon />}</Button>
+        {hasMounted && storedTheme === "dark" ? (
+          <Button onClick={handleTheme}>
+            <Sun />
+          </Button>
+        ) : (
+          <Button onClick={handleTheme}>
+            <Moon />
+          </Button>
+        )}
       </Tooltip>
     </ButtonWrapperStyles>
   )

@@ -1,4 +1,4 @@
-import {css} from "@emotion/react"
+import {css, SerializedStyles} from "@emotion/react"
 import styled from "@emotion/styled"
 import useToggle from "@hooks/toggle"
 import {pxToRem} from "@styles/css-helpers"
@@ -9,6 +9,7 @@ import React from "react"
 interface Props {
   title: string
   ariaLabel: string
+  incomingStyles?: SerializedStyles
 }
 
 const Wrapper = styled(motion.div)`
@@ -16,7 +17,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
 `
 
-const Tooltip: React.FC<Props> = ({title, ariaLabel, children}) => {
+const Tooltip: React.FC<Props> = ({title, ariaLabel, children, incomingStyles}) => {
   const {state: isOn, toFalse, toTrue} = useToggle()
   return (
     <Wrapper onMouseEnter={toTrue} onMouseLeave={toFalse}>
@@ -38,6 +39,7 @@ const Tooltip: React.FC<Props> = ({title, ariaLabel, children}) => {
             padding: 0.2rem;
             border-radius: ${borderRadius.borderRadiusM};
             z-index: -1;
+            ${incomingStyles};
           `}
           aria-hidden={true}
         >

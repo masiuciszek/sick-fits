@@ -19,7 +19,6 @@ interface Props {
 const Button: FC<Props> = ({incomingStyles, text, onClick, children, config}) => {
   return (
     <motion.button
-      whileHover={{boxShadow: elevations.shadowLg}}
       onClick={onClick}
       type="button"
       css={css`

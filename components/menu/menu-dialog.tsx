@@ -4,6 +4,8 @@ import {borderRadius, colors, elevations} from "@styles/styled-record"
 import {motion} from "framer-motion"
 import {above} from "@styles/media-query"
 import {pxToRem} from "@styles/css-helpers"
+import useOnClickOutside from "@hooks/click-outside"
+import {useRef} from "react"
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -51,20 +53,26 @@ const bodyVariants = {
     transition: {duration: 0.15, delay: 0.1},
   },
 }
+interface Props {
+  closeMenu: () => void
+}
 
-const MenuDialog = () =>
-  ReactDOM.createPortal(
+const MenuDialog = ({closeMenu}: Props) => {
+  const ref = useRef(null)
+  useOnClickOutside(ref, closeMenu)
+
+  return ReactDOM.createPortal(
     <Overlay
       data-testid="components-app-MenuDialog"
       role="dialog"
       tabIndex={-1}
-      aria-model="true"
       aria-label="search"
       initial={{backgroundColor: colors.colorBgBackground}}
       animate={{backgroundColor: colors.colorBgOverlay}}
       exit={{backgroundColor: colors.colorBgBackground}}
     >
       <Body
+        ref={ref}
         initial={bodyVariants["initial"]}
         animate={bodyVariants["animate"]}
         exit={bodyVariants["exit"]}
@@ -79,5 +87,6 @@ const MenuDialog = () =>
     </Overlay>,
     document.body,
   )
+}
 
 export default MenuDialog

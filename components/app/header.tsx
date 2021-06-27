@@ -20,9 +20,9 @@ import dynamic from "next/dynamic"
 import useHasMounted from "@hooks/has-mounted"
 import {css} from "@emotion/react"
 
-const Sun = dynamic(() => import("../icons/sun"), {ssr: true})
-const Moon = dynamic(() => import("../icons/moon"), {ssr: true})
-const MenuDialog = dynamic(() => import("../menu/menu-dialog"), {ssr: true})
+const Sun = dynamic(() => import("../icons/sun"))
+const Moon = dynamic(() => import("../icons/moon"))
+const MenuDialog = dynamic(() => import("../menu/menu-dialog"))
 
 const StyledHeader = styled.header`
   max-height: ${sizes.headerHeight};

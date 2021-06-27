@@ -61,13 +61,13 @@ const getActiveLink = (pathName: string, routerPathName: string) => pathName ===
 
 const Navigation = (): JSX.Element => {
   const router = useRouter()
-
   return (
-    <Nav>
+    <Nav data-testid="components-app-navigation">
       <NavList>
         {routes.map(({name, path}) => (
           <li
             key={name}
+            className={getActiveLink(path, router.pathname) ? "active" : "non-active"}
             css={css`
               ${listItemStyles(getActiveLink(path, router.pathname))};
             `}

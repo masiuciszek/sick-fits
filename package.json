@@ -57,8 +57,11 @@
     "husky": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
+    "jest-next-dynamic": "^1.0.1",
     "jest-watch-typeahead": "^0.6.4",
     "lint-staged": "^11.0.0",
+    "mq-polyfill": "^1.1.8",
+    "next-page-tester": "^0.26.1",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.4"
   },

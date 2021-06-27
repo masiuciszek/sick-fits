@@ -45,6 +45,8 @@ export const GlobalStyles = () => (
         --radnika: "radnika", sans-serif;
         --mono: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
           monospace;
+        --mono-hco: "HCo Operator Mono";
+        --operator: "Operator mono";
 
         /* Colors */
         --color-text-primary: #225feb;
@@ -131,6 +133,16 @@ export const GlobalStyles = () => (
         --color-gray-800: #293448;
         --color-gray-900: #1a202c;
         --color-react: #1e75d9;
+
+        /* Elevations */
+        --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
       }
       body[data-theme="dark"] {
         --color-text-primary: #81a7ff;
@@ -150,6 +162,16 @@ export const GlobalStyles = () => (
         --color-gray-800: #edf2f7;
         --color-gray-900: #f7fafc;
         --color-react: #9eddf8;
+
+        /* Elevations */
+        --shadow-s: 0 1px 2px 0 rgba(, 0, 0, 0.05);
+        --shadow-default: 0 1px 3px 0 rgba(, 0, 0, 0.1), 0 1px 2px 0 rgba(, 0, 0, 0.06);
+        --shadow-md: 0 0px 20px -6px rgba(0, 0, 0, 0.7);
+        --shadow-lg: 0 0px 25px -6px rgba(0, 0, 0, 0.8);
+        --shadow-xl: 0 0px 30px -6px rgba(0, 0, 0, 0.9);
+        --shadow-2xl: 21px 21px 42px #1f1f1f, -21px -21px 42px #292929;
+        --shadow-3xl: 21px 21px 55px #161616, -21px -21px 55px #323232;
+        --shadow-inner: inset 0 2px 4px 0 rgba(, 0, 0, 0.06);
       }
 
       h1,

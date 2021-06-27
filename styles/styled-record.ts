@@ -51,4 +51,6 @@ export const borderRadius = {
 export const fonts = {
   radnika: "var(--radnika)",
   operaorMono: "var(--mono)",
+  operaorMonoHco: "var(--mono-hco)",
+  operatorMonoDefault: "var(--operator)",
 }

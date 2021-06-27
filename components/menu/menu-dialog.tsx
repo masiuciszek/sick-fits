@@ -1,11 +1,15 @@
 import ReactDOM from "react-dom"
-import styled from "@emotion/styled"
 import {borderRadius, colors, elevations} from "@styles/styled-record"
 import {motion} from "framer-motion"
 import {above} from "@styles/media-query"
 import {pxToRem} from "@styles/css-helpers"
+import {useRef} from "react"
 import useOnClickOutside from "@hooks/click-outside"
-import React, {useRef} from "react"
+import routes from "../../data/routes.json"
+import styled from "@emotion/styled"
+import {useRouter} from "next/router"
+import {getActiveLink} from "@utils/helpers"
+import RouteLink from "@components/elements/route-link"
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -26,8 +30,8 @@ const Body = styled(motion.section)`
   left: 50%;
   transform: translateX(-50%);
   border: 2px solid ${colors.colorHighlight};
-  padding: 0.5rem;
-  background-color: ${colors.colorTextText};
+  padding: 0.2rem;
+  background-color: ${colors.colorBgBackground};
   color: ${colors.colorBgBackground};
   @media ${above.tablet} {
     width: ${pxToRem(650)};
@@ -60,20 +64,24 @@ interface Props {
 }
 
 const Form = styled.form`
-  padding: 0.2rem;
   display: flex;
   justify-content: center;
+  padding: 0.2rem;
+  width: 90%;
+  margin: 0 auto;
 `
 const Label = styled.label`
-  width: 90%;
+  width: 100%;
+  border: 2px solid red;
 `
 
 const Input = styled.input`
   width: 100%;
+  background: transparent;
   height: 2.5rem;
   border: 2px solid ${colors.colorBgBlack};
   border-radius: ${borderRadius.borderRadiusM};
-  padding-left: 0.5rem;
+  padding: 0 0.5rem;
   outline: none;
   font-size: 1.2rem;
   &::placeholder {
@@ -86,11 +94,29 @@ const Input = styled.input`
       opacity: 1;
     }
   }
+  -webkit-appearance: textfield;
+  ::-webkit-search-cancel-button,
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+`
+
+const RoutesWrapper = styled.ul`
+  border: 2px solid red;
+  padding: 1rem 0.2rem;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 `
 
 const MenuDialog = ({closeMenu}: Props) => {
   const ref = useRef(null)
   useOnClickOutside(ref, closeMenu)
+
+  const router = useRouter()
+  const activeLink = getActiveLink(router.pathname)
 
   return ReactDOM.createPortal(
     <Overlay
@@ -124,6 +150,13 @@ const MenuDialog = ({closeMenu}: Props) => {
             />
           </Label>
         </Form>
+
+        <RoutesWrapper>
+          <RouteLink name="home" path="/" active={activeLink("/")} />
+          {routes.map(({name, path}) => (
+            <RouteLink key={name} name={name} path={path} active={activeLink(path)} />
+          ))}
+        </RoutesWrapper>
       </Body>
     </Overlay>,
     document.body,

@@ -5,7 +5,8 @@ import {cleanup, render} from "@testing-library/react"
 import preloadAll from "jest-next-dynamic"
 import Header from "../header"
 import matchMediaPolyfill from "mq-polyfill"
-import MatchMediaMock from "../../../test/match-media-mock"
+// import MatchMediaMock from "../../../test/match-media-mock"
+import MatchMediaMock from "jest-matchmedia-mock"
 import {below} from "../../../styles/media-query"
 
 let matchMedia: MatchMediaMock

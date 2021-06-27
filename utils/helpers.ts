@@ -4,3 +4,5 @@ export const tail = <T>(value: string | Array<T>): Array<T> | string => value.sl
 export const push = <T>(list: Array<T>, value: T) => [...list, value]
 export const pop = <T>(list: Array<T>) => [...list].slice(0, -1)
 export const randomNumber = (n = 10) => Math.floor(Math.random() * n)
+export const getActiveLink = (routerPathName: string) => (pathName: string) =>
+  pathName === routerPathName

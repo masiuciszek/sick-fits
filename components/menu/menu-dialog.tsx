@@ -6,6 +6,7 @@ import {pxToRem} from "@styles/css-helpers"
 import {useRef} from "react"
 import useOnClickOutside from "@hooks/click-outside"
 import routes from "../../data/routes.json"
+import socialMedia from "../../data/social-data.json"
 import styled from "@emotion/styled"
 import {useRouter} from "next/router"
 import {getActiveLink} from "@utils/helpers"
@@ -111,6 +112,14 @@ const RoutesWrapper = styled.ul`
   justify-content: space-evenly;
 `
 
+const SocialWrapper = styled.ul`
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+`
+
 const MenuDialog = ({closeMenu}: Props) => {
   const ref = useRef(null)
   useOnClickOutside(ref, closeMenu)
@@ -150,6 +159,14 @@ const MenuDialog = ({closeMenu}: Props) => {
             />
           </Label>
         </Form>
+
+        <SocialWrapper>
+          {socialMedia.map(({name, url}) => (
+            <li key={name}>
+              <a href={url}>{name}</a>
+            </li>
+          ))}
+        </SocialWrapper>
 
         <RoutesWrapper>
           <RouteLink name="home" path="/" active={activeLink("/")} />

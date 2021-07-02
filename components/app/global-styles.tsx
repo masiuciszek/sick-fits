@@ -196,6 +196,7 @@ export const GlobalStyles = () => (
       }
       a {
         text-decoration: none;
+        color: var(--color-text-text);
       }
     `}
   />

@@ -7,3 +7,34 @@ tags: ["js"]
 keywords: ["wtf", "vip"]
 slug: js-closures
 ---
+
+> > Closure is something that access the value the that is not defined inside of it.
+
+In this example when we run the function we capture the `i` variable in closure and i will be incremented from 1 to 3.
+
+```ts
+let i = 0
+
+const closure = (): void => {
+  ++i
+  console.log(i)
+}
+
+closure() // 1
+closure() // 2
+closure() // 3
+```
+
+But if we would define the i insdie the function we wouild not capture the closure because `i` would be a new value for every function execution.
+
+```ts
+const closure = (): void => {
+  let i = 0
+  ++i
+  console.log(i)
+}
+
+closure() // 1
+closure() // 1
+closure() // 1
+```

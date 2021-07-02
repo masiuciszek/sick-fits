@@ -10,7 +10,7 @@ import useTheme, {ThemeValue} from "@hooks/theme"
 import Button from "@components/elements/button"
 // import Moon from "@components/icons/moon"
 // import Sun from "@components/icons/sun"
-import {colors, sizes} from "@styles/styled-record"
+import {colors, fonts, sizes} from "@styles/styled-record"
 import useToggle from "@hooks/toggle"
 import useMediaQuery from "@hooks/media-query"
 // import MenuDialog from "@components/menu/menu-dialog"
@@ -39,11 +39,19 @@ const HeaderContentContainer = styled.aside`
 `
 
 const LogoWrapper = styled.div`
-  border: 2px solid red;
   display: inline-block;
   display: flex;
   align-items: center;
+  position: relative;
+
   border: 2px solid red;
+  a {
+    display: block;
+    font-family: ${fonts.operaorMono};
+    font-weight: 700;
+    font-size: 2rem;
+    color: ${colors.colorTextText};
+  }
 `
 
 const Header = () => {
@@ -62,13 +70,12 @@ const Header = () => {
               ariaLabel="home page"
               incomingStyles={css`
                 z-index: 1;
-                left: 5%;
+                /* left: 3rem; */
+                /* top: 3rem; ; */
               `}
             >
               <Link href="/">
-                <a>
-                  <MarcellLogo />
-                </a>
+                <a>Marcell.C.D</a>
               </Link>
             </Tooltip>
           </LogoWrapper>

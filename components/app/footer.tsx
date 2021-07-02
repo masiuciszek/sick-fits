@@ -2,7 +2,7 @@ import {css} from "@emotion/react"
 import {sizes} from "@styles/styled-record"
 
 const footerStyles = css`
-  max-height: ${sizes.footerHeight};
+  min-height: ${sizes.footerHeight};
 `
 
 const Footer = () => {
@@ -10,6 +10,7 @@ const Footer = () => {
     <footer
       css={css`
         ${footerStyles};
+        border: 2px solid red;
       `}
     >
       <h1>Footer</h1>

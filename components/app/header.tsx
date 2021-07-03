@@ -1,9 +1,9 @@
 import {Fragment} from "react"
 import {useHotkeys} from "react-hotkeys-hook"
 import styled from "@emotion/styled"
-import MarcellLogo from "@components/icons/marcell-logo"
+
 import Navigation from "./nav"
-import {above} from "@styles/media-query"
+import {above, below} from "@styles/media-query"
 import Link from "next/link"
 import Cmd from "@components/icons/cmd"
 import useTheme, {ThemeValue} from "@hooks/theme"
@@ -43,7 +43,6 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-
   border: 2px solid red;
   a {
     display: block;
@@ -51,6 +50,9 @@ const LogoWrapper = styled.div`
     font-weight: 700;
     font-size: 2rem;
     color: ${colors.colorTextText};
+  }
+  @media ${below.tablet} {
+    justify-content: center;
   }
 `
 
@@ -65,27 +67,14 @@ const Header = () => {
       <StyledHeader>
         <HeaderContentContainer>
           <LogoWrapper>
-            <Tooltip
-              title="home"
-              ariaLabel="home page"
-              incomingStyles={css`
-                z-index: 1;
-                /* left: 3rem; */
-                /* top: 3rem; ; */
-              `}
-            >
+            <Tooltip title="home" ariaLabel="home-page">
               <Link href="/">
                 <a>Marcell.C.D</a>
               </Link>
             </Tooltip>
           </LogoWrapper>
           {isAboveTablet && <Navigation />}
-          <ButtonWrapper
-            showMenu={showMenu}
-            openMenu={openMenu}
-            handleTheme={handleTheme}
-            storedTheme={storedTheme}
-          />
+          <ButtonWrapper openMenu={openMenu} handleTheme={handleTheme} storedTheme={storedTheme} />
         </HeaderContentContainer>
       </StyledHeader>
 
@@ -102,22 +91,30 @@ const ButtonWrapperStyles = styled.div`
   border: 2px solid red;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   z-index: 2;
+  @media ${above.tablet} {
+    button {
+      margin-top: 0.8rem;
+    }
+  }
 `
 interface ButtonWrapperProps {
-  showMenu: boolean
   openMenu: () => void
   storedTheme: ThemeValue
   handleTheme: () => void
 }
 
-function ButtonWrapper({showMenu, openMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
+function ButtonWrapper({openMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
   const hasMounted = useHasMounted()
+
+  const themeTooltipLabel = hasMounted ? (storedTheme === "dark" ? "Dark" : "Light") : ""
+
   return (
     <ButtonWrapperStyles>
       <Tooltip
         title="ctr+k"
-        ariaLabel={showMenu ? "close menu" : "open menu"}
+        ariaLabel="cmd-menu"
         incomingStyles={css`
           left: -45%;
         `}
@@ -126,10 +123,7 @@ function ButtonWrapper({showMenu, openMenu, storedTheme, handleTheme}: ButtonWra
           <Cmd />
         </Button>
       </Tooltip>
-      <Tooltip
-        title={`${storedTheme === "dark" ? "light" : "dark"}`}
-        ariaLabel={`switch theme to ${storedTheme === "dark" ? "light" : "dark"}`}
-      >
+      <Tooltip title={themeTooltipLabel} ariaLabel="control-theme">
         {hasMounted && storedTheme === "dark" ? (
           <Button onClick={handleTheme}>
             <Sun />

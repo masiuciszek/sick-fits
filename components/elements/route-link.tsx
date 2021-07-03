@@ -19,6 +19,7 @@ const ListItem: FC<ListItemProps> = ({children, incomingStyles}) => (
   <li
     css={css`
       position: relative;
+      text-transform: capitalize;
       &:after {
         content: "";
         background-color: ${colors.colorTextPrimary};

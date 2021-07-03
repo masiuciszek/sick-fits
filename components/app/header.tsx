@@ -8,12 +8,10 @@ import Link from "next/link"
 import Cmd from "@components/icons/cmd"
 import useTheme, {ThemeValue} from "@hooks/theme"
 import Button from "@components/elements/button"
-// import Moon from "@components/icons/moon"
-// import Sun from "@components/icons/sun"
+
 import {colors, fonts, sizes} from "@styles/styled-record"
 import useToggle from "@hooks/toggle"
 import useMediaQuery from "@hooks/media-query"
-// import MenuDialog from "@components/menu/menu-dialog"
 import AnimateWrapper from "@components/common/animate-wrapper"
 import Tooltip from "@components/common/tooltip"
 import dynamic from "next/dynamic"
@@ -34,7 +32,7 @@ const HeaderContentContainer = styled.aside`
   margin: 0 auto;
   grid-template-columns: 1fr;
   @media ${above.tablet} {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
   }
 `
 
@@ -43,13 +41,19 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  border: 2px solid red;
+
   a {
     display: block;
     font-family: ${fonts.operaorMono};
     font-weight: 700;
     font-size: 2rem;
     color: ${colors.colorTextText};
+    @media ${above.tablet} {
+      padding-left: 0.5rem;
+    }
+  }
+  span {
+    color: ${colors.colorHighlight};
   }
   @media ${below.tablet} {
     justify-content: center;
@@ -67,14 +71,27 @@ const Header = () => {
       <StyledHeader>
         <HeaderContentContainer>
           <LogoWrapper>
-            <Tooltip title="home" ariaLabel="home-page">
+            <Tooltip
+              title="home"
+              ariaLabel="home-page"
+              incomingStyles={css`
+                bottom: -50%;
+              `}
+            >
               <Link href="/">
-                <a>Marcell.C.D</a>
+                <a>
+                  <span>M</span>ar<span>c</span>ell.<span>C</span>.D
+                </a>
               </Link>
             </Tooltip>
           </LogoWrapper>
           {isAboveTablet && <Navigation />}
-          <ButtonWrapper openMenu={openMenu} handleTheme={handleTheme} storedTheme={storedTheme} />
+          <ButtonWrapper
+            isMenuOpen={showMenu}
+            openMenu={openMenu}
+            handleTheme={handleTheme}
+            storedTheme={storedTheme}
+          />
         </HeaderContentContainer>
       </StyledHeader>
 
@@ -85,12 +102,10 @@ const Header = () => {
   )
 }
 
-export default Header
-
 const ButtonWrapperStyles = styled.div`
   border: 2px solid red;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   z-index: 2;
   @media ${above.tablet} {
@@ -103,12 +118,13 @@ interface ButtonWrapperProps {
   openMenu: () => void
   storedTheme: ThemeValue
   handleTheme: () => void
+  isMenuOpen: boolean
 }
 
-function ButtonWrapper({openMenu, storedTheme, handleTheme}: ButtonWrapperProps) {
+function ButtonWrapper({openMenu, storedTheme, handleTheme, isMenuOpen}: ButtonWrapperProps) {
   const hasMounted = useHasMounted()
 
-  const themeTooltipLabel = hasMounted ? (storedTheme === "dark" ? "Dark" : "Light") : ""
+  const themeTooltipLabel = hasMounted ? (storedTheme === "dark" ? "Light" : "Dark") : ""
 
   return (
     <ButtonWrapperStyles>
@@ -120,7 +136,7 @@ function ButtonWrapper({openMenu, storedTheme, handleTheme}: ButtonWrapperProps)
         `}
       >
         <Button onClick={openMenu}>
-          <Cmd />
+          <Cmd isActive={isMenuOpen} />
         </Button>
       </Tooltip>
       <Tooltip title={themeTooltipLabel} ariaLabel="control-theme">
@@ -137,3 +153,5 @@ function ButtonWrapper({openMenu, storedTheme, handleTheme}: ButtonWrapperProps)
     </ButtonWrapperStyles>
   )
 }
+
+export default Header

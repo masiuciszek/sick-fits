@@ -11,7 +11,7 @@ import HiIAmMarcell from "@components/icons/hi-i-am-marcell"
 const HomePageLayout = styled.section`
   display: grid;
   grid-template-columns: 1fr;
-  border: 2px solid blue;
+
   height: 100%;
 
   @media ${above.tablet} {
@@ -21,7 +21,6 @@ const HomePageLayout = styled.section`
 `
 
 const CtaColumn = styled.aside`
-  border: 2px solid blue;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,8 +8,8 @@ const Sun = () => (
     exit={{opacity: 0, rotate: 5, x: -20}}
     transition={{delay: 0.25, stiffness: 50}}
     xmlns="http://www.w3.org/2000/svg"
-    width="30"
-    height="30"
+    width="25"
+    height="25"
     fill={colors.colorTextText}
     viewBox="0 0 256 256"
   >

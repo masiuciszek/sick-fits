@@ -5,7 +5,8 @@ export const GlobalStyles = () => (
     styles={css`
       @font-face {
         font-family: "HCo Operator Mono";
-        src: url("/fonts/operator/OperatorMono-BookItalic_Web.woff2") format("woff2");
+        src: url("/fonts/operator/OperatorMono-BookItalic_Web.woff2")
+          format("woff2");
         font-weight: 400;
         font-style: normal;
       }
@@ -19,7 +20,8 @@ export const GlobalStyles = () => (
 
       @font-face {
         font-family: "HCo Operator Mono";
-        src: url("/fonts/operator/OperatorMono-BoldItalic_Web.woff2") format("woff2");
+        src: url("/fonts/operator/OperatorMono-BoldItalic_Web.woff2")
+          format("woff2");
         font-weight: 700;
         font-style: normal;
       }
@@ -43,8 +45,8 @@ export const GlobalStyles = () => (
       :root {
         /* fonts */
         --radnika: "radnika", sans-serif;
-        --mono: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
-          monospace;
+        --mono: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono",
+          "Ubuntu Mono", monospace;
         --mono-hco: "HCo Operator Mono";
         --operator: "Operator mono";
 
@@ -86,10 +88,14 @@ export const GlobalStyles = () => (
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
         --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
@@ -136,10 +142,14 @@ export const GlobalStyles = () => (
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
         --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
@@ -165,13 +175,30 @@ export const GlobalStyles = () => (
 
         /* Elevations */
         --shadow-s: 0 1px 2px 0 rgba(, 0, 0, 0.05);
-        --shadow-default: 0 1px 3px 0 rgba(, 0, 0, 0.1), 0 1px 2px 0 rgba(, 0, 0, 0.06);
+        --shadow-default: 0 1px 3px 0 rgba(, 0, 0, 0.1),
+          0 1px 2px 0 rgba(, 0, 0, 0.06);
         --shadow-md: 0 0px 20px -6px rgba(0, 0, 0, 0.7);
         --shadow-lg: 0 0px 25px -6px rgba(0, 0, 0, 0.8);
         --shadow-xl: 0 0px 30px -6px rgba(0, 0, 0, 0.9);
         --shadow-2xl: 21px 21px 42px #1f1f1f, -21px -21px 42px #292929;
         --shadow-3xl: 21px 21px 55px #161616, -21px -21px 55px #323232;
         --shadow-inner: inset 0 2px 4px 0 rgba(, 0, 0, 0.06);
+      }
+
+      h1 {
+        font-size: var(--h1);
+      }
+      h2 {
+        font-size: var(--h2);
+      }
+      h3 {
+        font-size: var(--h3);
+      }
+      h4 {
+        font-size: var(--h4);
+      }
+      h5 {
+        font-size: var(--h5);
       }
 
       h1,

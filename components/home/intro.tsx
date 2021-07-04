@@ -11,8 +11,10 @@ import {above} from "@styles/media-query"
 
 const styles = css`
   background-color: ${colors.colorBgBackground};
-  font-size: ${pxToRem(23)};
   padding: 2rem;
+  h1 {
+    font-size: ${pxToRem(32)};
+  }
   span {
     &:nth-of-type(1) {
       color: ${colors.colorTextText};
@@ -55,7 +57,7 @@ const LinkWrapper = styled.div`
 
   font-size: ${pxToRem(15)};
   @media ${above.mobileL} {
-    font-size: ${pxToRem(23)};
+    font-size: ${pxToRem(20)};
   }
 `
 
@@ -69,9 +71,10 @@ const Intro = () => {
         </span>
         <span>
           {" "}
-          Here where I share my thoughts, ideas, and experience as a software engineer and
-          everything that interests me that I would love to share. Topics like{" "}
-          <Highlighter>computer science</Highlighter>, <Highlighter>React</Highlighter>,{" "}
+          Here where I share my thoughts, ideas, and experience as a software
+          engineer and everything that interests me that I would love to share.
+          Topics like <Highlighter>computer science</Highlighter>,{" "}
+          <Highlighter>React</Highlighter>,{" "}
           <Highlighter>software engineering</Highlighter>, and a good{" "}
           <Highlighter>user experience</Highlighter> are close to my heart.
         </span>

@@ -12,7 +12,6 @@ const Nav = styled.nav`
 const NavList = styled.ul`
   display: flex;
   justify-content: space-between;
-  border: 2px solid red;
   padding: 0.5rem;
   flex: 1;
   height: 100%;

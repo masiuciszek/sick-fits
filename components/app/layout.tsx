@@ -11,6 +11,7 @@ const Main = styled.main`
   min-height: calc(
     110vh - ${sizes.headerHeight} * 2
   ); /**Footer and height footer height TIMES header height */
+  margin-bottom: 2rem;
 `
 
 export const Layout: FC = ({children}) => {

@@ -7,6 +7,7 @@ import Wave from "@components/icons/wave"
 import Link from "next/link"
 import styled from "@emotion/styled"
 import Twitter from "@components/icons/twitter"
+import {above} from "@styles/media-query"
 
 const styles = css`
   background-color: ${colors.colorBgBackground};
@@ -50,6 +51,11 @@ const LinkWrapper = styled.div`
         width: 90%;
       }
     }
+  }
+
+  font-size: ${pxToRem(15)};
+  @media ${above.mobileL} {
+    font-size: ${pxToRem(23)};
   }
 `
 

@@ -41,7 +41,6 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-
   a {
     display: block;
     font-family: ${fonts.operaorMono};
@@ -103,7 +102,6 @@ const Header = () => {
 }
 
 const ButtonWrapperStyles = styled.div`
-  border: 2px solid red;
   display: flex;
   justify-content: center;
   align-items: center;

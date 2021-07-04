@@ -11,7 +11,6 @@ import HiIAmMarcell from "@components/icons/hi-i-am-marcell"
 const HomePageLayout = styled.section`
   display: grid;
   grid-template-columns: 1fr;
-
   height: 100%;
 
   @media ${above.tablet} {

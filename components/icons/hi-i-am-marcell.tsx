@@ -8,9 +8,10 @@ const HiIAmMarcell = () => (
     viewBox="0 0 383 375"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    initial={{scale: 0.7, opacity: 0}}
+    initial={{scale: 0.8, opacity: 0}}
     animate={{scale: 1, opacity: 1}}
     exit={{scale: 0.7, opacity: 0}}
+    transition={{delay: 0.25, stiffness: 50, duration: 0.7}}
   >
     <g id="dark-home-icon">
       <g id="dark-circle">

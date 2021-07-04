@@ -24,7 +24,8 @@ const MenuDialog = dynamic(() => import("../menu/menu-dialog"))
 
 const StyledHeader = styled.header`
   max-height: ${sizes.headerHeight};
-  background-color: ${colors.colorBgNavigation};
+  /* background-color: ${colors.colorBgNavigation}; */
+  background-color: ${colors.colorGray100};
 `
 const HeaderContentContainer = styled.aside`
   display: grid;

@@ -6,7 +6,6 @@ import Footer from "./footer"
 
 const Main = styled.main`
   max-width: ${sizes.maxWidth};
-  border: 1px solid red;
   margin: 0 auto;
   min-height: calc(
     110vh - ${sizes.headerHeight} * 2

@@ -6,7 +6,7 @@ interface Props {
   height?: number
 }
 
-const Twitter = ({width = 30, height = 30}: Props) => (
+const Twitter = ({width = 25, height = 25}: Props) => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

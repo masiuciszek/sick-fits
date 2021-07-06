@@ -4,25 +4,13 @@ import {GetStaticProps} from "next"
 import styled from "@emotion/styled"
 import Title from "@components/common/title"
 import Seo from "@components/common/seo"
-import {FC, Fragment} from "react"
-import {formatDate} from "@utils/helpers"
+import {Fragment} from "react"
 import {css} from "@emotion/react"
-import {colors, sizes} from "@styles/styled-record"
-import Link from "next/link"
-import {above} from "@styles/media-query"
-
-interface PostItem {
-  title: string
-  spoiler: string
-  date?: string
-  updated: string
-  tags: string[]
-  keywords?: string[]
-  slug: string
-}
+import {PostItemType} from "@components/blog/types"
+import PostItem from "@components/blog/post-item"
 
 interface Props {
-  posts: PostItem[]
+  posts: PostItemType[]
 }
 
 const PostsList = styled.ul`
@@ -39,6 +27,7 @@ const BlogPage: NextPage<Props> = ({posts}) => {
         incomingStyles={css`
           border: 2px solid red;
           text-align: center;
+          margin: 1rem auto;
         `}
       >
         <h1>All posts</h1>
@@ -51,35 +40,6 @@ const BlogPage: NextPage<Props> = ({posts}) => {
     </Fragment>
   )
 }
-
-const PostItem: FC<PostItem> = ({title, spoiler, updated, tags, slug}) => (
-  <li
-    css={css`
-      border: 2px solid red;
-      width: 100%;
-      @media ${above.tablet} {
-        width: 700px;
-      }
-      .title-and-date {
-        font-size: ${sizes.h3};
-        color: ${colors.colorTextPrimary};
-      }
-    `}
-  >
-    <p className="title-and-date">
-      {title} {formatDate(updated)}{" "}
-    </p>
-    <p>{spoiler}</p>
-
-    {tags.map((tag) => (
-      <div key={tag}>{tag}</div>
-    ))}
-
-    <Link href={`/posts/${slug}`}>
-      <a>to {title} &#8594;</a>
-    </Link>
-  </li>
-)
 
 export default BlogPage
 

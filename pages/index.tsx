@@ -57,8 +57,8 @@ const Home: NextPage = () => (
           <Link href="/blog">
             <a>blog</a>
           </Link>
-          <Link href="/about">
-            <a>about</a>
+          <Link href="/bites">
+            <a>bites</a>
           </Link>
         </LinkGroup>
       </CtaColumn>

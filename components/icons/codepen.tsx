@@ -1,9 +1,9 @@
-const Codepen = () => {
+const Codepen = ({width = 25, height = 25}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="25"
+      width={width}
+      height={height}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

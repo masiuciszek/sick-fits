@@ -1,12 +1,7 @@
 import {colors} from "@styles/styled-record"
 import {motion} from "framer-motion"
 
-interface Props {
-  width?: number
-  height?: number
-}
-
-const Twitter = ({width = 25, height = 25}: Props) => (
+const Twitter = ({width = 25, height = 25}) => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

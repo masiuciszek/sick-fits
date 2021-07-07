@@ -46,7 +46,7 @@ const TagsList = styled.ul`
     color: ${colors.colorTextWhite};
     padding: ${pxToRem(2)};
     font-size: ${pxToRem(12)};
-    min-width: ${pxToRem(65)};
+    min-width: ${pxToRem(55)};
     align-items: center;
     justify-content: space-between;
     margin-left: ${pxToRem(5)};
@@ -93,7 +93,7 @@ const PostItem: FC<PostItemType> = ({title, spoiler, updated, tags, slug}) => (
         </li>
       ))}
       <li className="list-item-link">
-        <Link href={`/posts/${slug}`}>
+        <Link href={`/blog/${slug}`}>
           <a>To {title} &#8594;</a>
         </Link>
       </li>

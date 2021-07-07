@@ -1,10 +1,10 @@
 import {motion} from "framer-motion"
 
-const Github = () => (
+const Github = ({width = 25, height = 25}) => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
-    width="25"
-    height="25"
+    width={width}
+    height={height}
     viewBox="0 0 25 25"
     fill="none"
     stroke="currentColor"

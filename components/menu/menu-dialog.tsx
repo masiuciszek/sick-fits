@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom"
-import {borderRadius, colors, elevations} from "@styles/styled-record"
+import {borderRadius, colors, elevations, fonts} from "@styles/styled-record"
 import {motion} from "framer-motion"
 import {above} from "@styles/media-query"
 import {pxToRem} from "@styles/css-helpers"
@@ -11,6 +11,11 @@ import styled from "@emotion/styled"
 import {useRouter} from "next/router"
 import {getActiveLink} from "@utils/helpers"
 import RouteLink from "@components/elements/route-link"
+import Github from "@components/icons/github"
+import Linkedin from "@components/icons/linkedin"
+import Codepen from "@components/icons/codepen"
+import Twitter from "@components/icons/twitter"
+import {css} from "@emotion/react"
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -31,7 +36,8 @@ const Body = styled(motion.section)`
   left: 50%;
   transform: translateX(-50%);
   border: 2px solid ${colors.colorHighlight};
-  padding: 0.2rem;
+  /* padding: 0.2rem; */
+  padding: 0.2rem 2.2rem;
   background-color: ${colors.colorBgBackground};
   color: ${colors.colorBgBackground};
   @media ${above.tablet} {
@@ -68,12 +74,10 @@ const Form = styled.form`
   display: flex;
   justify-content: center;
   padding: 0.2rem;
-  width: 90%;
   margin: 0 auto;
 `
 const Label = styled.label`
   width: 100%;
-  border: 2px solid red;
 `
 
 const Input = styled.input`
@@ -103,9 +107,7 @@ const Input = styled.input`
 `
 
 const RoutesWrapper = styled.ul`
-  border: 2px solid red;
   padding: 1rem 0.2rem;
-  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
@@ -114,10 +116,22 @@ const RoutesWrapper = styled.ul`
 
 const SocialWrapper = styled.ul`
   display: flex;
+  flex-flow: column wrap;
   justify-content: space-evenly;
-  width: 90%;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0.5rem;
+  li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    a {
+      display: flex;
+      align-items: center;
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 `
 
 const MenuDialog = ({closeMenu}: Props) => {
@@ -148,6 +162,7 @@ const MenuDialog = ({closeMenu}: Props) => {
           duration: 0.2,
         }}
       >
+        <Banner text="Search for needs" />
         <Form>
           <Label htmlFor="blog-post-search">
             <Input
@@ -160,23 +175,69 @@ const MenuDialog = ({closeMenu}: Props) => {
           </Label>
         </Form>
 
+        <Banner text="Social links" />
         <SocialWrapper>
           {socialMedia.map(({name, url}) => (
             <li key={name}>
-              <a href={url}>{name}</a>
+              <a href={url}>
+                {renderIcon(name)}
+                {name}
+              </a>
             </li>
           ))}
         </SocialWrapper>
 
+        <Banner text="Application links" />
         <RoutesWrapper>
           <RouteLink name="home" path="/" active={activeLink("/")} />
           {routes.map(({name, path}) => (
-            <RouteLink key={name} name={name} path={path} active={activeLink(path)} />
+            <RouteLink
+              key={name}
+              name={name}
+              path={path}
+              active={activeLink(path)}
+            />
           ))}
         </RoutesWrapper>
       </Body>
     </Overlay>,
     document.body,
+  )
+}
+
+function renderIcon(name: string) {
+  switch (name) {
+    case "github":
+      return <Github width={20} height={20} />
+    case "twitter":
+      return <Twitter width={20} height={20} />
+    case "linkedin":
+      return <Linkedin width={20} height={20} />
+    case "codepen":
+      return <Codepen width={20} height={20} />
+
+    default:
+      throw new Error(`Unknown name ${name} `)
+  }
+}
+
+const Banner = ({text}: {text: string}) => {
+  return (
+    <aside
+      role="banner"
+      css={css`
+        color: ${colors.colorTextText};
+        background-color: ${colors.colorGray100};
+        padding: 0.5rem;
+        border-radius: ${borderRadius.borderRadiusM};
+        box-shadow: ${elevations.shadowMd};
+        p {
+          font-family: ${fonts.operaorMono};
+        }
+      `}
+    >
+      <p>{text}</p>
+    </aside>
   )
 }
 

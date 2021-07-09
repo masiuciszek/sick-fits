@@ -78,6 +78,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = getAllPosts({
     fields: ["title", "spoiler", "updated", "tags", "slug"],
   })
+
   return {
     props: {
       posts,

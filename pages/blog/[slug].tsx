@@ -1,12 +1,12 @@
-import {FC, Fragment} from "react"
-import {GetStaticPaths, GetStaticProps} from "next"
-import {useRouter} from "next/router"
-import {ParsedUrlQuery} from "querystring"
+import Seo from "@components/common/seo"
 import {getAllPosts, getPostBySlug} from "lib/api"
 import {serializeMdx} from "lib/markdown-to-html"
-import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote"
+import {GetStaticPaths, GetStaticProps} from "next"
 import Link from "next/link"
-import Seo from "@components/common/seo"
+import {useRouter} from "next/router"
+import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote"
+import {ParsedUrlQuery} from "querystring"
+import {FC, Fragment} from "react"
 // import {PostItemType} from "@components/blog/types"
 
 // interface FrontMatter extends PostItemType {

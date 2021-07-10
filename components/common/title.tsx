@@ -1,4 +1,4 @@
-import {css, SerializedStyles} from "@emotion/react"
+import {css,SerializedStyles} from "@emotion/react"
 import {FC} from "react"
 
 interface Props {

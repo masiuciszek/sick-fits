@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+
 import useHasMounted from "./has-mounted"
 
 const useMediaQuery = (mediaQuery: string): boolean => {

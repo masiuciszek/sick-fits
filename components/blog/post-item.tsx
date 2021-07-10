@@ -1,8 +1,7 @@
+import Hash from "@components/icons/hash"
 import styled from "@emotion/styled"
 import {pxToRem} from "@styles/css-helpers"
 import {above} from "@styles/media-query"
-import Hash from "@components/icons/hash"
-import Link from "next/link"
 import {
   borderRadius,
   colors,
@@ -11,7 +10,9 @@ import {
   sizes,
 } from "@styles/styled-record"
 import {formatDate} from "@utils/helpers"
+import Link from "next/link"
 import {FC} from "react"
+
 import {PostItemType} from "./types"
 
 const StyledItem = styled.li`

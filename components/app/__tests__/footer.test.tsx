@@ -1,5 +1,6 @@
-import Footer from "../footer"
 import {render, screen} from "@testing-library/react"
+
+import Footer from "../footer"
 
 describe("footer", () => {
   test("should ", () => {

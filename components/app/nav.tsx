@@ -1,8 +1,9 @@
-import styled from "@emotion/styled"
-import {useRouter} from "next/router"
-import routes from "../../data/routes.json"
 import RouteLink from "@components/elements/route-link"
+import styled from "@emotion/styled"
 import {getActiveLink} from "@utils/helpers"
+import {useRouter} from "next/router"
+
+import routes from "../../data/routes.json"
 
 const Nav = styled.nav`
   display: flex;

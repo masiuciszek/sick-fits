@@ -7,8 +7,9 @@ import styled from "@emotion/styled"
 import {pxToRem} from "@styles/css-helpers"
 import {above} from "@styles/media-query"
 import {colors, fonts, sizes} from "@styles/styled-record"
-import socialMedia from "../../data/social-data.json"
 import Link from "next/link"
+
+import socialMedia from "../../data/social-data.json"
 
 const FooterGroup = styled.section`
   border-top: 1px solid ${colors.colorTextText};

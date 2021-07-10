@@ -1,8 +1,9 @@
 import styled from "@emotion/styled"
-import Header from "./header"
-import {FC, Fragment} from "react"
 import {sizes} from "@styles/styled-record"
+import {FC, Fragment} from "react"
+
 import Footer from "./footer"
+import Header from "./header"
 
 const Main = styled.main`
   max-width: ${sizes.maxWidth};

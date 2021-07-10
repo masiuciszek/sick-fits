@@ -1,15 +1,16 @@
-import {getAllPosts} from "../../lib/api"
-import {NextPage} from "next"
-import {GetStaticProps} from "next"
-import styled from "@emotion/styled"
-import Title from "@components/common/title"
-import Seo from "@components/common/seo"
-import {Fragment} from "react"
-import {css} from "@emotion/react"
-import {PostItemType} from "@components/blog/types"
 import PostItem from "@components/blog/post-item"
+import {PostItemType} from "@components/blog/types"
+import Seo from "@components/common/seo"
+import Title from "@components/common/title"
+import {css} from "@emotion/react"
+import styled from "@emotion/styled"
 import {pxToRem} from "@styles/css-helpers"
 import {colors, fonts} from "@styles/styled-record"
+import {NextPage} from "next"
+import {GetStaticProps} from "next"
+import {Fragment} from "react"
+
+import {getAllPosts} from "../../lib/api"
 
 interface Props {
   posts: PostItemType[]

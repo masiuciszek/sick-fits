@@ -1,7 +1,8 @@
-import {Fragment} from "react"
-import siteConfig from "../../site-config.json"
-import {NextSeo, ArticleJsonLd} from "next-seo"
 import {TWITTER_CARD_TYPE} from "@utils/constants"
+import {ArticleJsonLd, NextSeo} from "next-seo"
+import {Fragment} from "react"
+
+import siteConfig from "../../site-config.json"
 interface Props {
   image?: string
   description?: string
@@ -11,9 +12,17 @@ interface Props {
   updated?: string
 }
 
-const formatDate = (date: string | undefined): string => (date ? new Date(date).toISOString() : "")
+const formatDate = (date: string | undefined): string =>
+  date ? new Date(date).toISOString() : ""
 
-const Seo = ({title, description, image, path, date, updated}: Props): JSX.Element => {
+const Seo = ({
+  title,
+  description,
+  image,
+  path,
+  date,
+  updated,
+}: Props): JSX.Element => {
   const {
     twitter,
     author,

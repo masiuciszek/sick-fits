@@ -1,13 +1,13 @@
-import Title from "@components/common/title"
-import {css} from "@emotion/react"
-import {pxToRem} from "@styles/css-helpers"
-import {colors} from "@styles/styled-record"
 import Highlighter from "@components/common/highlighter"
-import Wave from "@components/icons/wave"
-import Link from "next/link"
-import styled from "@emotion/styled"
+import Title from "@components/common/title"
 import Twitter from "@components/icons/twitter"
+import Wave from "@components/icons/wave"
+import {css} from "@emotion/react"
+import styled from "@emotion/styled"
+import {pxToRem} from "@styles/css-helpers"
 import {above} from "@styles/media-query"
+import {colors} from "@styles/styled-record"
+import Link from "next/link"
 
 const styles = css`
   background-color: ${colors.colorBgBackground};

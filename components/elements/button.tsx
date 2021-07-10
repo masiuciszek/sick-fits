@@ -1,8 +1,8 @@
-import {FC} from "react"
 import {css, SerializedStyles} from "@emotion/react"
 import {buttonResetStyles, pxToRem} from "@styles/css-helpers"
-import {motion} from "framer-motion"
 import {borderRadius, colors, elevations} from "@styles/styled-record"
+import {motion} from "framer-motion"
+import {FC} from "react"
 
 type BtnType = "solid" | "default" | "primary"
 
@@ -30,11 +30,21 @@ interface Props {
   incomingStyles?: SerializedStyles
   text?: string
   onClick?: () => void
-  config?: Record<string, string | boolean | number | Record<string, string | boolean | number>>
+  config?: Record<
+    string,
+    string | boolean | number | Record<string, string | boolean | number>
+  >
   type?: BtnType
 }
 
-const Button: FC<Props> = ({incomingStyles, text, onClick, children, config, type = "default"}) => {
+const Button: FC<Props> = ({
+  incomingStyles,
+  text,
+  onClick,
+  children,
+  config,
+  type = "default",
+}) => {
   return (
     <motion.button
       onClick={onClick}

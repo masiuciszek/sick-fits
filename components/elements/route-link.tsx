@@ -1,4 +1,4 @@
-import {css, SerializedStyles} from "@emotion/react"
+import {css,SerializedStyles} from "@emotion/react"
 import {pxToRem} from "@styles/css-helpers"
 import {colors} from "@styles/styled-record"
 import Link from "next/link"

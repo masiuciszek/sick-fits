@@ -1,12 +1,12 @@
+import {buttonStyles} from "@components/elements/button"
 import Intro from "@components/home/intro"
+import HiIAmMarcell from "@components/icons/hi-i-am-marcell"
 import styled from "@emotion/styled"
 import {above} from "@styles/media-query"
-import {NextPage} from "next"
-import {Fragment} from "react"
-import Link from "next/link"
-import {buttonStyles} from "@components/elements/button"
 import {colors} from "@styles/styled-record"
-import HiIAmMarcell from "@components/icons/hi-i-am-marcell"
+import {NextPage} from "next"
+import Link from "next/link"
+import {Fragment} from "react"
 
 const HomePageLayout = styled.section`
   display: grid;

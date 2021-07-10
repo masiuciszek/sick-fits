@@ -1,22 +1,21 @@
-import {Fragment} from "react"
-import {useHotkeys} from "react-hotkeys-hook"
-import styled from "@emotion/styled"
-
-import Navigation from "./nav"
-import {above, below} from "@styles/media-query"
-import Link from "next/link"
-import Cmd from "@components/icons/cmd"
-import useTheme, {ThemeValue} from "@hooks/theme"
-import Button from "@components/elements/button"
-
-import {colors, fonts, sizes} from "@styles/styled-record"
-import useToggle from "@hooks/toggle"
-import useMediaQuery from "@hooks/media-query"
 import AnimateWrapper from "@components/common/animate-wrapper"
 import Tooltip from "@components/common/tooltip"
-import dynamic from "next/dynamic"
-import useHasMounted from "@hooks/has-mounted"
+import Button from "@components/elements/button"
+import Cmd from "@components/icons/cmd"
 import {css} from "@emotion/react"
+import styled from "@emotion/styled"
+import useHasMounted from "@hooks/has-mounted"
+import useMediaQuery from "@hooks/media-query"
+import useTheme, {ThemeValue} from "@hooks/theme"
+import useToggle from "@hooks/toggle"
+import {above, below} from "@styles/media-query"
+import {colors, fonts, sizes} from "@styles/styled-record"
+import dynamic from "next/dynamic"
+import Link from "next/link"
+import {Fragment} from "react"
+import {useHotkeys} from "react-hotkeys-hook"
+
+import Navigation from "./nav"
 
 const Sun = dynamic(() => import("../icons/sun"))
 const Moon = dynamic(() => import("../icons/moon"))

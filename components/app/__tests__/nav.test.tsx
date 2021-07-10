@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import {render, cleanup, screen} from "@testing-library/react"
+import {cleanup, render, screen} from "@testing-library/react"
+
 import Navigation from "../nav"
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter")

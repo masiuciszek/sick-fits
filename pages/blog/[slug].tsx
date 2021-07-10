@@ -1,102 +1,99 @@
-// import {getAllPosts, getPostBySlug} from "lib/api"
-// import markDownToHtml from "lib/markdown-to-html"
-// import {GetStaticPaths, GetStaticProps} from "next"
+import {FC, Fragment} from "react"
 import {GetStaticPaths, GetStaticProps} from "next"
 import {useRouter} from "next/router"
-// import {ParsedUrlQuery} from "querystring"
-import fs from "fs"
-import path from "path"
-import {getPostBySlug} from "lib/api"
-import {MDXRemote} from "next-mdx-remote"
-import {serialize} from "next-mdx-remote/serialize"
+import {ParsedUrlQuery} from "querystring"
+import {getAllPosts, getPostBySlug} from "lib/api"
+import {serializeMdx} from "lib/markdown-to-html"
+import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote"
+import Link from "next/link"
+import Seo from "@components/common/seo"
+// import {PostItemType} from "@components/blog/types"
 
-const PostPage = ({postData}) => {
+// interface FrontMatter extends PostItemType {
+//   date: string
+//   keywords: string[]
+// }
+
+interface Props {
+  postData: MDXRemoteSerializeResult
+  postSlugs: string[]
+}
+
+const PostPage: FC<Props> = ({postData, postSlugs}) => {
   const router = useRouter()
 
-  console.log("postData", postData)
-  return <h1>{router.query.slug} </h1>
+  if (router.isFallback) {
+    return <div>...loading</div>
+  }
+
+  const currentPostIndex = postSlugs.findIndex((p) => p === router.query.slug)
+
+  return (
+    <Fragment>
+      <Seo
+        title={`Blog post ${router.query.slug}`}
+        description={`About blog post ${router.query.slug}, and the whole story`}
+      />
+      <div>
+        <MDXRemote {...postData} components={{}} />
+        <div className="post-navigation">
+          {currentPostIndex > 0 && (
+            <Link href={`/blog/${postSlugs[currentPostIndex - 1]}`}>
+              <a>prev</a>
+            </Link>
+          )}
+
+          {currentPostIndex < postSlugs.length - 1 && (
+            <Link href={`/blog/${postSlugs[currentPostIndex + 1]}`}>
+              <a>next</a>
+            </Link>
+          )}
+        </div>
+      </div>
+    </Fragment>
+  )
 }
 export default PostPage
 
-// export type GetStaticProps<
-//   P extends { [key: string]: any } = { [key: string]: any },
-//   Q extends ParsedUrlQuery = ParsedUrlQuery
-// > = (
-//   context: GetStaticPropsContext<Q>
-// ) => Promise<GetStaticPropsResult<P>> | GetStaticPropsResult<P>
-
-export const getStaticProps: GetStaticProps = async ({params}: any) => {
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "date",
-    "slug",
-    "updated",
-    "tags",
-    "keywords",
+interface Result {
+  postData: MDXRemoteSerializeResult<Record<string, unknown>>
+}
+interface Params extends ParsedUrlQuery {
+  slug: string
+}
+export const getStaticProps: GetStaticProps<Result, Params> = async ({
+  params,
+}) => {
+  const slug = params?.slug ?? "http"
+  const post = getPostBySlug(slug, [
     "content",
+    "title",
+    "updated",
+    "created",
+    "tags",
   ])
-
-  console.log({post})
-
-  const mdxSource = await serialize(post.content, {
-    // Optionally pass remark/rehype plugins
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: [],
-    },
-    scope: post,
+  const allPosts = getAllPosts({
+    fields: ["slug"],
   })
 
-  // console.log("mdxSource", mdxSource)
+  const mdxSource = await serializeMdx({
+    post,
+    content: post.content,
+  })
 
   return {
     props: {
       postData: mdxSource,
+      postSlugs: allPosts.map(({slug}) => slug),
     },
   }
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths = fs
-    .readdirSync(path.join(process.cwd(), "posts"))
-    .map((p) => p.replace(/\.mdx?$/, ""))
+  const posts = getAllPosts({fields: ["slug"]})
 
   return {
-    paths: paths.map((slug) => ({params: {slug}})),
+    paths: posts.map(({slug}) => ({params: {slug}})),
     fallback: true,
   }
 }
-
-// interface Props {
-//   post: any
-//   content: string
-// }
-// interface Params extends ParsedUrlQuery {
-//   slug: string
-// }
-
-// export const getStaticProps: GetStaticProps<any, Params> = async ({params}) => {
-//   const slug = params.slug as string
-//   console.log("slug", slug)
-//   const post = getPostBySlug(slug, ["title"])
-
-//   // const content = await markDownToHtml(post.content || "")
-
-//   return {
-//     props: {
-//       // ...post,
-//       // content,
-//       a: "",
-//     },
-//   }
-// }
-
-// export const getStaticPaths = async () => {
-//   const posts = getAllPosts({fields: ["slug"]})
-
-//   console.log("posts", posts)
-//   return {
-//     paths: posts.map(({slug}) => ({params: {slug}})),
-//     fallback: true,
-//   }
-// }

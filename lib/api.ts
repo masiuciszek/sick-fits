@@ -1,6 +1,9 @@
 import fs from "fs"
 import {join} from "path"
 import matter from "gray-matter"
+interface Item {
+  [key: string]: string
+}
 
 const getDirectory = (directory: string) => {
   return join(process.cwd(), directory)
@@ -19,10 +22,6 @@ export const getPostBySlug = (slug: string, fields: string[] = []) => {
   const fileContents = fs.readFileSync(fullPath, "utf8")
 
   const {data: frontMatter, content} = matter(fileContents)
-
-  interface Item {
-    [key: string]: string
-  }
 
   const postItem: Item = {}
 

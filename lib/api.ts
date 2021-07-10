@@ -24,23 +24,23 @@ export const getPostBySlug = (slug: string, fields: string[] = []) => {
     [key: string]: string
   }
 
-  const items: Item = {}
+  const postItem: Item = {}
 
   for (const field of fields) {
     if (field === "slug") {
-      items[field] = fixedSlug
+      postItem[field] = fixedSlug
     }
     // if we need the blog content then we can pass it via the field list
-    if (content === "content") {
-      items[field] = content
+    if (field === "content") {
+      postItem[field] = content
     }
 
     if (frontMatter[field]) {
-      items[field] = frontMatter[field]
+      postItem[field] = frontMatter[field]
     }
   }
 
-  return items
+  return postItem
 }
 
 interface GetPosts {

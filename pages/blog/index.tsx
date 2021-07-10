@@ -10,6 +10,8 @@ import {PostItemType} from "@components/blog/types"
 import PostItem from "@components/blog/post-item"
 import {pxToRem} from "@styles/css-helpers"
 import {colors, fonts} from "@styles/styled-record"
+import fs from "fs"
+import path from "path"
 
 interface Props {
   posts: PostItemType[]
@@ -78,7 +80,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = getAllPosts({
     fields: ["title", "spoiler", "updated", "tags", "slug"],
   })
+  const paths = fs
+    .readdirSync(path.join(process.cwd(), "posts"))
+    .map((p) => p.replace(/\.mdx?$/, ""))
 
+  console.log("paths", paths)
   return {
     props: {
       posts,

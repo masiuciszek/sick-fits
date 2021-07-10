@@ -1,10 +1,16 @@
-import {PostItemType} from "@components/blog/types"
-import Seo from "@components/common/seo"
-import {css} from "@emotion/react"
 import {
   PostNavigation as PostNavigationStyles,
-  PostWrapper,
-} from "@styles/[slug]-styles"
+  tagsStyles,
+} from "@components/blog/styles"
+import {PostItemType} from "@components/blog/types"
+import Seo from "@components/common/seo"
+import Brackets from "@components/icons/brackets"
+import Hash from "@components/icons/hash"
+import {css} from "@emotion/react"
+import styled from "@emotion/styled"
+import {pxToRem} from "@styles/css-helpers"
+import {colors, fonts} from "@styles/styled-record"
+import {formatDate, length} from "@utils/helpers"
 import {getAllPosts, getPostBySlug} from "lib/api"
 import {serializeMdx} from "lib/markdown-to-html"
 import {GetStaticPaths, GetStaticProps} from "next"
@@ -19,44 +25,33 @@ interface FrontMatter extends PostItem {
   date: string
   keywords: string[]
 }
+type FrontMatterValues = FrontMatter[keyof PostItem]
 
 const getPostIndex = (postSlugs: string[], slug: string) => {
   const currentPostIndex = postSlugs.findIndex((p) => p === slug)
   const previousPosSlug = postSlugs[currentPostIndex - 1]
   const nextPostSlug = postSlugs[currentPostIndex + 1]
-
   return {currentPostIndex, previousPosSlug, nextPostSlug}
-}
-
-const getFrontMatter = (scope: Record<string, unknown>) => {
-  const frontMatter = {} as FrontMatter
-  switch (true) {
-    case scope?.title:
-      frontMatter.title = scope.title as string
-      break
-    case scope?.updated:
-      frontMatter.date = scope.date as string
-      break
-    case scope?.date:
-      frontMatter.date = scope.date as string
-      break
-    case scope?.tags:
-      frontMatter.tags = scope.tags as string[]
-      break
-    case scope?.keywords:
-      frontMatter.keywords = scope.keywords as string[]
-      break
-    case scope?.spoiler:
-      frontMatter.spoiler = scope.spoiler as string
-      break
-  }
-  return frontMatter
 }
 
 interface Props {
   postData: MDXRemoteSerializeResult
   postSlugs: string[]
 }
+
+const EditPostLink = styled.a`
+  position: absolute;
+  top: 5rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: ${pxToRem(10)};
+  padding: ${pxToRem(4)};
+  svg {
+    margin-right: ${pxToRem(5)};
+  }
+  border-bottom: 1px solid ${colors.colorTextPrimary};
+`
 
 const PostPage: FC<Props> = ({postData, postSlugs}) => {
   const router = useRouter()
@@ -68,7 +63,11 @@ const PostPage: FC<Props> = ({postData, postSlugs}) => {
     postSlugs,
     router.query.slug as string,
   )
-  const {title, spoiler} = getFrontMatter(postData?.scope ?? {})
+
+  const {title, spoiler, updated, tags} = postData?.scope as Record<
+    string,
+    FrontMatterValues
+  >
 
   return (
     <Fragment>
@@ -77,6 +76,21 @@ const PostPage: FC<Props> = ({postData, postSlugs}) => {
         description={`About blog post ${title}. ${spoiler}`}
       />
       <PostWrapper>
+        <h1>
+          {title} <span>{formatDate(updated as string)}</span>
+        </h1>
+
+        <List>
+          {(tags as Array<string>).map((tag) => (
+            <li key={tag}>
+              <Hash /> {tag}
+            </li>
+          ))}{" "}
+        </List>
+
+        <EditPostLink href="https://github.com/masiucd/blog/pulls">
+          <Brackets /> edit post
+        </EditPostLink>
         <MDXRemote {...postData} components={{}} />
         <PostNavigation
           currentPostIndex={currentPostIndex}
@@ -112,7 +126,7 @@ const PostNavigation = ({
         <p>previous post</p>
       )}
 
-      {currentPostIndex < postSlugs.length - 1 ? (
+      {currentPostIndex < length(postSlugs) - 1 ? (
         <Link href={`/blog/${nextPostSlug}`} css={css``}>
           <a> {nextPostSlug} </a>
         </Link>
@@ -124,7 +138,7 @@ const PostNavigation = ({
 }
 
 interface Result {
-  postData: MDXRemoteSerializeResult<Record<string, unknown>>
+  postData: MDXRemoteSerializeResult
 }
 interface Params extends ParsedUrlQuery {
   slug: string
@@ -168,3 +182,24 @@ export const getStaticPaths: GetStaticPaths = () => {
     fallback: true,
   }
 }
+
+const PostWrapper = styled.article`
+  padding: 0.25rem;
+  max-width: 950px;
+  margin: ${pxToRem(40)} auto ${pxToRem(10)};
+  position: relative;
+  h1 {
+    span {
+      border-bottom: 1px solid ${colors.colorHighlight};
+      font-family: ${fonts.operaorMonoHco};
+    }
+  }
+`
+
+const List = styled.ul`
+  display: flex;
+  margin-bottom: 0.75rem;
+  li {
+    ${tagsStyles};
+  }
+`

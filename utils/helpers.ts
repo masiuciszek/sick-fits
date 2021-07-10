@@ -1,4 +1,4 @@
-import {format} from "date-fns"
+import {format, parseISO} from "date-fns"
 
 export const length = <T>(value: string | Array<T>): number => value.length
 export const head = <T>(value: string | Array<T>): string | T => value[0]
@@ -10,10 +10,5 @@ export const randomNumber = (n = 10) => Math.floor(Math.random() * n)
 export const getActiveLink = (routerPathName: string) => (pathName: string) =>
   pathName === routerPathName
 export const toNumber = (str: string): number => parseInt(str, 10)
-export const formatDate = (date: string) => {
-  const [year, month, day] = date.split("-")
-  return format(
-    new Date(toNumber(year), toNumber(month), toNumber(day)),
-    "LLLL do yyyy",
-  )
-}
+export const formatDate = (date: string) =>
+  format(parseISO(date), "LLLL do yyyy")

@@ -1,5 +1,7 @@
 import {css} from "@emotion/react"
 
+import {colors} from "./styled-record"
+
 export const pxToRem = (px: number, baseFont = 16) => `${px / baseFont}rem`
 export const remToPx = (rem: number, baseFont = 16) => `${rem * baseFont}px`
 
@@ -11,6 +13,7 @@ export const buttonResetStyles = css`
   border: none;
   padding: 0;
   margin: 0;
+  color: ${colors.colorTextText};
 `
 
 export const commonGridStyles = css`

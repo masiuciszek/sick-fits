@@ -45,13 +45,14 @@ export const getPostBySlug = (slug: string, fields: string[] = []) => {
 interface GetPosts {
   fields: string[]
   limit?: number // TODO: When there are more posts
+  sort?: "ASC" | "DESC"
 }
 
-export const getAllPosts = ({fields}: GetPosts) => {
+export const getAllPosts = ({fields, sort = "DESC"}: GetPosts) => {
   const slugs = getPostSlugs()
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    .sort((p1, p2) => (p1.updated > p2.updated ? -1 : 1))
+  const posts = slugs.map((slug) => getPostBySlug(slug, fields))
 
-  return posts
+  return sort === "DESC"
+    ? posts.sort((p1, p2) => (p1.updated > p2.updated ? -1 : 1))
+    : posts.sort((p1, p2) => (p1.updated > p2.updated ? 1 : -1))
 }

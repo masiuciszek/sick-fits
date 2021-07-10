@@ -29,7 +29,7 @@ const StyledItem = styled.li`
     width: ${pxToRem(600)};
   }
   .title-and-date {
-    font-size: ${sizes.h3};
+    font-size: ${sizes.h4};
     color: ${colors.colorTextPrimary};
   }
   .spoiler {

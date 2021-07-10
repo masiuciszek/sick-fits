@@ -1,5 +1,10 @@
 import {PostItemType} from "@components/blog/types"
 import Seo from "@components/common/seo"
+import {css} from "@emotion/react"
+import {
+  PostNavigation as PostNavigationStyles,
+  PostWrapper,
+} from "@styles/[slug]-styles"
 import {getAllPosts, getPostBySlug} from "lib/api"
 import {serializeMdx} from "lib/markdown-to-html"
 import {GetStaticPaths, GetStaticProps} from "next"
@@ -15,31 +20,39 @@ interface FrontMatter extends PostItem {
   keywords: string[]
 }
 
-const getPostIndex = (postSlugs: string[], slug: string) =>
-  postSlugs.findIndex((p) => p === slug)
+const getPostIndex = (postSlugs: string[], slug: string) => {
+  const currentPostIndex = postSlugs.findIndex((p) => p === slug)
+  const previousPosSlug = postSlugs[currentPostIndex - 1]
+  const nextPostSlug = postSlugs[currentPostIndex + 1]
+
+  return {currentPostIndex, previousPosSlug, nextPostSlug}
+}
 
 const getFrontMatter = (scope: Record<string, unknown>) => {
   const frontMatter = {} as FrontMatter
-  if (scope?.title !== undefined) {
-    frontMatter.title = scope.title as string
-  }
-  if (scope?.date) {
-    frontMatter.date = scope.date as string
-  }
-  if (scope?.updated) {
-    frontMatter.updated = scope.updated as string
-  }
-  if (scope?.tags) {
-    frontMatter.tags = scope.tags as string[]
-  }
-  if (scope?.keywords) {
-    frontMatter.keywords = scope.keywords as string[]
-  }
-  if (scope?.spoiler) {
-    frontMatter.spoiler = scope.spoiler as string
+  switch (true) {
+    case scope?.title:
+      frontMatter.title = scope.title as string
+      break
+    case scope?.updated:
+      frontMatter.date = scope.date as string
+      break
+    case scope?.date:
+      frontMatter.date = scope.date as string
+      break
+    case scope?.tags:
+      frontMatter.tags = scope.tags as string[]
+      break
+    case scope?.keywords:
+      frontMatter.keywords = scope.keywords as string[]
+      break
+    case scope?.spoiler:
+      frontMatter.spoiler = scope.spoiler as string
+      break
   }
   return frontMatter
 }
+
 interface Props {
   postData: MDXRemoteSerializeResult
   postSlugs: string[]
@@ -48,9 +61,13 @@ interface Props {
 const PostPage: FC<Props> = ({postData, postSlugs}) => {
   const router = useRouter()
   if (router.isFallback) {
+    // TODO: Fix
     return <div>...loading</div>
   }
-  const currentPostIndex = getPostIndex(postSlugs, router.query.slug as string)
+  const {currentPostIndex, previousPosSlug, nextPostSlug} = getPostIndex(
+    postSlugs,
+    router.query.slug as string,
+  )
   const {title, spoiler} = getFrontMatter(postData?.scope ?? {})
 
   return (
@@ -59,26 +76,52 @@ const PostPage: FC<Props> = ({postData, postSlugs}) => {
         title={`Blog post ${title}`}
         description={`About blog post ${title}. ${spoiler}`}
       />
-      <div>
+      <PostWrapper>
         <MDXRemote {...postData} components={{}} />
-        <div className="post-navigation">
-          {currentPostIndex > 0 && (
-            <Link href={`/blog/${postSlugs[currentPostIndex - 1]}`}>
-              <a>prev</a>
-            </Link>
-          )}
-
-          {currentPostIndex < postSlugs.length - 1 && (
-            <Link href={`/blog/${postSlugs[currentPostIndex + 1]}`}>
-              <a>next</a>
-            </Link>
-          )}
-        </div>
-      </div>
+        <PostNavigation
+          currentPostIndex={currentPostIndex}
+          previousPosSlug={previousPosSlug}
+          nextPostSlug={nextPostSlug}
+          postSlugs={postSlugs}
+        />
+      </PostWrapper>
     </Fragment>
   )
 }
 export default PostPage
+
+interface PostNavigationProps {
+  currentPostIndex: number
+  previousPosSlug: string
+  nextPostSlug: string
+  postSlugs: string[]
+}
+const PostNavigation = ({
+  currentPostIndex,
+  previousPosSlug,
+  nextPostSlug,
+  postSlugs,
+}: PostNavigationProps) => {
+  return (
+    <PostNavigationStyles>
+      {currentPostIndex > 0 ? (
+        <Link href={`/blog/${previousPosSlug}`}>
+          <a>{previousPosSlug}</a>
+        </Link>
+      ) : (
+        <p>previous post</p>
+      )}
+
+      {currentPostIndex < postSlugs.length - 1 ? (
+        <Link href={`/blog/${nextPostSlug}`} css={css``}>
+          <a> {nextPostSlug} </a>
+        </Link>
+      ) : (
+        <p>no more posts</p>
+      )}
+    </PostNavigationStyles>
+  )
+}
 
 interface Result {
   postData: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -100,7 +143,8 @@ export const getStaticProps: GetStaticProps<Result, Params> = async ({
     "spoiler",
   ])
   const allPosts = getAllPosts({
-    fields: ["slug"],
+    fields: ["slug", "updated"],
+    sort: "DESC",
   })
 
   const mdxSource = await serializeMdx({

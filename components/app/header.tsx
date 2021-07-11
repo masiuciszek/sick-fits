@@ -12,7 +12,7 @@ import {above, below} from "@styles/media-query"
 import {colors, fonts, sizes} from "@styles/styled-record"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import {Fragment} from "react"
+import React, {Fragment, useCallback} from "react"
 import {useHotkeys} from "react-hotkeys-hook"
 
 import Navigation from "./nav"
@@ -62,8 +62,15 @@ const LogoWrapper = styled.div`
 const Header = () => {
   const {storedTheme, handleTheme} = useTheme()
   const isAboveTablet = useMediaQuery(above.tablet)
-  const {state: showMenu, toTrue: openMenu, toFalse: closeMenu, toggle: toggleMenu} = useToggle()
+  const {
+    state: showMenu,
+    toTrue: openMenu,
+    toFalse: closeMenu,
+    toggle: toggleMenu,
+  } = useToggle()
+
   useHotkeys("ctrl+k", toggleMenu)
+  useHotkeys("ctrl+t", handleTheme)
 
   return (
     <Fragment>
@@ -119,10 +126,18 @@ interface ButtonWrapperProps {
   isMenuOpen: boolean
 }
 
-function ButtonWrapper({openMenu, storedTheme, handleTheme, isMenuOpen}: ButtonWrapperProps) {
+function ButtonWrapper({
+  openMenu,
+  storedTheme,
+  handleTheme,
+  isMenuOpen,
+}: ButtonWrapperProps) {
   const hasMounted = useHasMounted()
-
-  const themeTooltipLabel = hasMounted ? (storedTheme === "dark" ? "Light" : "Dark") : ""
+  const themeTooltipLabel = hasMounted
+    ? storedTheme === "dark"
+      ? "Light"
+      : "Dark"
+    : ""
 
   return (
     <ButtonWrapperStyles>

@@ -20,12 +20,12 @@ import socialMedia from "../../data/social-data.json"
 
 const cmdKeys = [
   {
-    name: "show/hide menu",
+    name: "Show/Hide menu",
     keys: ["ctr", "k"],
   },
 
   {
-    name: "toggle theme",
+    name: "Toggle theme",
     keys: ["ctr", "t"],
   },
 ]
@@ -279,7 +279,14 @@ const CmdKeys = styled.ul`
     .keys {
       span {
         display: inline-block;
-        margin-right: ${pxToRem(22)};
+        margin-right: ${pxToRem(8)};
+        background-color: ${colors.colorGray300};
+        padding: ${pxToRem(5)};
+        min-width: ${pxToRem(30)};
+        text-align: center;
+        border-radius: ${borderRadius.borderRadiusS};
+        color: ${colors.colorTextPrimary};
+        box-shadow: ${elevations.shadowMd};
       }
     }
   }

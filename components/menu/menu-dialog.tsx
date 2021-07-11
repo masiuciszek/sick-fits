@@ -86,7 +86,7 @@ const Input = styled.input`
   background: transparent;
   height: 2.5rem;
   border: 2px solid ${colors.colorBgBlack};
-  border-radius: ${borderRadius.borderRadiusM};
+  border-radius: ${borderRadius.borderRadiusS};
   padding: 0 0.5rem;
   outline: none;
   font-size: 1.2rem;

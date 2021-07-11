@@ -6,6 +6,7 @@ import {PostItemType} from "@components/blog/types"
 import Seo from "@components/common/seo"
 import Brackets from "@components/icons/brackets"
 import Hash from "@components/icons/hash"
+import CodeBlock from "@components/mdx/code-block"
 import {css} from "@emotion/react"
 import styled from "@emotion/styled"
 import {pxToRem} from "@styles/css-helpers"
@@ -14,6 +15,7 @@ import {formatDate, length} from "@utils/helpers"
 import {getAllPosts, getPostBySlug} from "lib/api"
 import {serializeMdx} from "lib/markdown-to-html"
 import {GetStaticPaths, GetStaticProps} from "next"
+// import dynamic from "next/dynamic"
 import Link from "next/link"
 import {useRouter} from "next/router"
 import {MDXRemote, MDXRemoteSerializeResult} from "next-mdx-remote"
@@ -50,8 +52,28 @@ const EditPostLink = styled.a`
   svg {
     margin-right: ${pxToRem(5)};
   }
-  border-bottom: 1px solid ${colors.colorTextPrimary};
+  &:after {
+    position: absolute;
+    content: "";
+    background-color: ${colors.colorTextPrimary};
+    width: 40%;
+    height: 2px;
+    bottom: 0;
+    left: ${pxToRem(7)};
+    transition: 200ms ease-in-out width;
+  }
+  &:hover {
+    opacity: 0.6;
+    &:after {
+      width: 80%;
+    }
+  }
 `
+
+const components = {
+  // CodeBlock: dynamic(() => import("../../components/mdx/code-block")),
+  CodeBlock,
+}
 
 const PostPage: FC<Props> = ({postData, postSlugs}) => {
   const router = useRouter()
@@ -91,7 +113,7 @@ const PostPage: FC<Props> = ({postData, postSlugs}) => {
         <EditPostLink href="https://github.com/masiucd/blog/pulls">
           <Brackets /> edit post
         </EditPostLink>
-        <MDXRemote {...postData} components={{}} />
+        <MDXRemote {...postData} components={components} />
         <PostNavigation
           currentPostIndex={currentPostIndex}
           previousPosSlug={previousPosSlug}

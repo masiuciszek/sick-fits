@@ -12,29 +12,14 @@ slug: js-closures
 
 In this example when we run the function we capture the `i` variable in closure and i will be incremented from 1 to 3.
 
-```ts
-let i = 0
-
-const closure = (): void => {
-  ++i
-  console.log(i)
-}
-
-closure() // 1
-closure() // 2
-closure() // 3
-```
+<CodeBlock
+  code={`let i: number = 0\n const closure = () => {\n ++i \n console.log(i)\n} \n closure() /*1*/ \n closure() /*2*/ \n closure() /*3*/ \n`}
+  language="ts"
+/>
 
 But if we would define the i insdie the function we wouild not capture the closure because `i` would be a new value for every function execution.
 
-```ts
-const closure = (): void => {
-  let i = 0
-  ++i
-  console.log(i)
-}
-
-closure() // 1
-closure() // 1
-closure() // 1
-```
+<CodeBlock
+  code={`const closure = (): void => {\n  let i = 0\n  ++i\n  console.log(i) \n} \n closure() /*1*/ \n closure() /*1*/ \n closure() /*1*/ \n`}
+  language="ts"
+/>

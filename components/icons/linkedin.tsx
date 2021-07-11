@@ -16,7 +16,7 @@ const Linkedin = ({width = 25, height = 25}) => (
       height="176"
       rx="8"
       strokeWidth="16"
-      stroke={colors.colorTextText}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
@@ -27,7 +27,7 @@ const Linkedin = ({width = 25, height = 25}) => (
       x2="120"
       y2="176.00094"
       fill="none"
-      stroke={colors.colorTextText}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
@@ -38,7 +38,7 @@ const Linkedin = ({width = 25, height = 25}) => (
       x2="88"
       y2="176.00094"
       fill="none"
-      stroke={colors.colorTextText}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
@@ -46,7 +46,7 @@ const Linkedin = ({width = 25, height = 25}) => (
     <path
       d="M120,140.00094a28,28,0,1,1,56,0v36"
       fill="none"
-      stroke={colors.colorTextText}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"

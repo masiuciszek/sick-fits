@@ -10,7 +10,7 @@ import CodeBlock from "@components/mdx/code-block"
 import {css} from "@emotion/react"
 import styled from "@emotion/styled"
 import {pxToRem} from "@styles/css-helpers"
-import {colors, fonts} from "@styles/styled-record"
+import {colors, fonts, sizes} from "@styles/styled-record"
 import {formatDate, length} from "@utils/helpers"
 import {getAllPosts, getPostBySlug} from "lib/api"
 import {serializeMdx} from "lib/markdown-to-html"
@@ -39,40 +39,6 @@ const getPostIndex = (postSlugs: string[], slug: string) => {
 interface Props {
   postData: MDXRemoteSerializeResult
   postSlugs: string[]
-}
-
-const EditPostLink = styled.a`
-  position: absolute;
-  top: 5rem;
-  right: 2rem;
-  display: flex;
-  align-items: center;
-  font-size: ${pxToRem(10)};
-  padding: ${pxToRem(4)};
-  svg {
-    margin-right: ${pxToRem(5)};
-  }
-  &:after {
-    position: absolute;
-    content: "";
-    background-color: ${colors.colorTextPrimary};
-    width: 40%;
-    height: 2px;
-    bottom: 0;
-    left: ${pxToRem(7)};
-    transition: 200ms ease-in-out width;
-  }
-  &:hover {
-    opacity: 0.6;
-    &:after {
-      width: 80%;
-    }
-  }
-`
-
-const components = {
-  // CodeBlock: dynamic(() => import("../../components/mdx/code-block")),
-  CodeBlock,
 }
 
 const PostPage: FC<Props> = ({postData, postSlugs}) => {
@@ -113,7 +79,7 @@ const PostPage: FC<Props> = ({postData, postSlugs}) => {
         <EditPostLink href="https://github.com/masiucd/blog/pulls">
           <Brackets /> edit post
         </EditPostLink>
-        <MDXRemote {...postData} components={components} />
+        <MDXRemote {...postData} components={components} lazy />
         <PostNavigation
           currentPostIndex={currentPostIndex}
           previousPosSlug={previousPosSlug}
@@ -211,6 +177,7 @@ const PostWrapper = styled.article`
   margin: ${pxToRem(40)} auto ${pxToRem(10)};
   position: relative;
   h1 {
+    font-size: ${sizes.h3};
     span {
       border-bottom: 1px solid ${colors.colorHighlight};
       font-family: ${fonts.operaorMonoHco};
@@ -225,3 +192,37 @@ const List = styled.ul`
     ${tagsStyles};
   }
 `
+
+const EditPostLink = styled.a`
+  position: absolute;
+  top: 5rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: ${pxToRem(10)};
+  padding: ${pxToRem(4)};
+  svg {
+    margin-right: ${pxToRem(5)};
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    background-color: ${colors.colorTextPrimary};
+    width: 40%;
+    height: 2px;
+    bottom: 0;
+    left: ${pxToRem(7)};
+    transition: 200ms ease-in-out width;
+  }
+  &:hover {
+    opacity: 0.6;
+    &:after {
+      width: 80%;
+    }
+  }
+`
+
+const components = {
+  // CodeBlock: dynamic(() => import("../../components/mdx/code-block")),
+  CodeBlock,
+}

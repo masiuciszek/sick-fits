@@ -18,6 +18,18 @@ import ReactDOM from "react-dom"
 import routes from "../../data/routes.json"
 import socialMedia from "../../data/social-data.json"
 
+const cmdKeys = [
+  {
+    name: "show/hide menu",
+    keys: ["ctr", "k"],
+  },
+
+  {
+    name: "toggle theme",
+    keys: ["ctr", "t"],
+  },
+]
+
 const Overlay = styled(motion.div)`
   position: fixed;
   background-color: ${colors.colorBgOverlay};
@@ -37,8 +49,6 @@ const Body = styled(motion.section)`
   left: 50%;
   transform: translateX(-50%);
   border: 2px solid ${colors.colorHighlight};
-  /* padding: 0.2rem; */
-  padding: 0.2rem 2.2rem;
   background-color: ${colors.colorBgBackground};
   color: ${colors.colorBgBackground};
   @media ${above.tablet} {
@@ -74,8 +84,7 @@ interface Props {
 const Form = styled.form`
   display: flex;
   justify-content: center;
-  padding: 0.2rem;
-  margin: 0 auto;
+  margin: 0 auto 3rem auto;
 `
 const Label = styled.label`
   width: 100%;
@@ -84,22 +93,29 @@ const Label = styled.label`
 const Input = styled.input`
   width: 100%;
   background: transparent;
-  height: 2.5rem;
+  height: ${pxToRem(45)};
   border: 2px solid ${colors.colorBgBlack};
+  border: none;
   border-radius: ${borderRadius.borderRadiusS};
-  padding: 0 0.5rem;
+  padding: 0 ${pxToRem(15)};
   outline: none;
   font-size: 1.2rem;
-  &::placeholder {
+  color: ${colors.colorTextText};
+  caret-color: ${colors.colorTextText};
+  font-family: ${fonts.operatorMonoDefault};
+  position: absolute;
+  top: 0;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
     opacity: 0.7;
     font-size: 1.1rem;
   }
-  &:focus {
-    border-color: ${colors.colorTextPrimary};
-    &::placeholder {
-      opacity: 1;
-    }
+  :-ms-input-placeholder {
+    opacity: 0.7;
+    font-size: 1.1rem;
   }
+
   -webkit-appearance: textfield;
   ::-webkit-search-cancel-button,
   ::-webkit-search-decoration {
@@ -120,14 +136,21 @@ const SocialWrapper = styled.ul`
   flex-flow: column wrap;
   justify-content: space-evenly;
   margin: 0 auto;
-  padding: 0.5rem;
+
   li {
-    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
+    padding: ${pxToRem(10)};
+    &:hover {
+      background-color: ${colors.colorGray200};
+      a {
+        color: ${colors.colorTextPrimary};
+      }
+    }
     a {
       display: flex;
       align-items: center;
+
       svg {
         margin-right: 0.5rem;
       }
@@ -163,10 +186,10 @@ const MenuDialog = ({closeMenu}: Props) => {
           duration: 0.2,
         }}
       >
-        <Banner text="Search for needs" />
         <Form>
           <Label htmlFor="blog-post-search">
             <Input
+              autoFocus
               autoComplete="off"
               type="search"
               placeholder="search for a blog post"
@@ -176,30 +199,47 @@ const MenuDialog = ({closeMenu}: Props) => {
           </Label>
         </Form>
 
-        <Banner text="Social links" />
-        <SocialWrapper>
-          {socialMedia.map(({name, url}) => (
-            <li key={name}>
-              <a href={url}>
-                {renderIcon(name)}
-                {name}
-              </a>
-            </li>
-          ))}
-        </SocialWrapper>
+        <Container>
+          <Banner text="Command shortcuts" />
 
-        <Banner text="Application links" />
-        <RoutesWrapper>
-          <RouteLink name="home" path="/" active={activeLink("/")} />
-          {routes.map(({name, path}) => (
-            <RouteLink
-              key={name}
-              name={name}
-              path={path}
-              active={activeLink(path)}
-            />
-          ))}
-        </RoutesWrapper>
+          <CmdKeys>
+            {cmdKeys.map(({name, keys}) => (
+              <li key={name}>
+                {name}
+                <div className="keys">
+                  {keys.map((key) => (
+                    <span key={key}>{key}</span>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </CmdKeys>
+
+          <Banner text="Social links" />
+          <SocialWrapper>
+            {socialMedia.map(({name, url}) => (
+              <li key={name}>
+                <a href={url}>
+                  {renderIcon(name)}
+                  {name}
+                </a>
+              </li>
+            ))}
+          </SocialWrapper>
+
+          <Banner text="Navigation" />
+          <RoutesWrapper>
+            <RouteLink name="home" path="/" active={activeLink("/")} />
+            {routes.map(({name, path}) => (
+              <RouteLink
+                key={name}
+                name={name}
+                path={path}
+                active={activeLink(path)}
+              />
+            ))}
+          </RoutesWrapper>
+        </Container>
       </Body>
     </Overlay>,
     document.body,
@@ -222,6 +262,29 @@ function renderIcon(name: string) {
   }
 }
 
+const Container = styled.section`
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 25rem;
+`
+
+const CmdKeys = styled.ul`
+  li {
+    color: ${colors.colorTextText};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: ${pxToRem(10)};
+    .keys {
+      span {
+        display: inline-block;
+        margin-right: ${pxToRem(22)};
+      }
+    }
+  }
+`
+
 const Banner = ({text}: {text: string}) => {
   return (
     <aside
@@ -229,7 +292,7 @@ const Banner = ({text}: {text: string}) => {
       css={css`
         color: ${colors.colorTextText};
         background-color: ${colors.colorGray100};
-        padding: 0.5rem;
+        padding: 0.75rem;
         border-radius: ${borderRadius.borderRadiusM};
         box-shadow: ${elevations.shadowMd};
         p {

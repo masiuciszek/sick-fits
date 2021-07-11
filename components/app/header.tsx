@@ -23,7 +23,6 @@ const MenuDialog = dynamic(() => import("../menu/menu-dialog"))
 
 const StyledHeader = styled.header`
   max-height: ${sizes.headerHeight};
-  /* background-color: ${colors.colorBgNavigation}; */
   background-color: ${colors.colorGray100};
 `
 const HeaderContentContainer = styled.aside`
@@ -70,9 +69,7 @@ const Header = () => {
   } = useToggle()
 
   useHotkeys("ctrl+k", toggleMenu)
-  useHotkeys("ctrl+t", handleTheme, {keyup: true, filterPreventDefault: true}, [
-    storedTheme,
-  ])
+  useHotkeys("ctrl+t", handleTheme, {keyup: true}, [storedTheme])
 
   return (
     <Fragment>

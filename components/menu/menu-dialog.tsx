@@ -2,6 +2,7 @@ import RouteLink from "@components/elements/route-link"
 import Codepen from "@components/icons/codepen"
 import Github from "@components/icons/github"
 import Linkedin from "@components/icons/linkedin"
+import {length} from "@utils/helpers"
 import Twitter from "@components/icons/twitter"
 import {css} from "@emotion/react"
 import styled from "@emotion/styled"
@@ -12,7 +13,7 @@ import {borderRadius, colors, elevations, fonts} from "@styles/styled-record"
 import {getActiveLink} from "@utils/helpers"
 import {motion} from "framer-motion"
 import {useRouter} from "next/router"
-import {useRef} from "react"
+import {Fragment, useReducer, useRef} from "react"
 import ReactDOM from "react-dom"
 
 import routes from "../../data/routes.json"
@@ -158,7 +159,29 @@ const SocialWrapper = styled.ul`
   }
 `
 
+const ActionTypes = {
+  SET_FIELD_VALUE: "SET_FIELD_VALUE",
+}
+
+type Action = {type: "SET_FIELD_VALUE"; payload: string}
+
+interface State {
+  filterValue: string
+}
+
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    case ActionTypes["SET_FIELD_VALUE"]:
+      return {...state, filterValue: action.payload}
+    default:
+      throw new Error(`Unknown action type ${action.type}`)
+  }
+}
+
 const MenuDialog = ({closeMenu}: Props) => {
+  const [{filterValue}, dispatch] = useReducer(reducer, {
+    filterValue: "",
+  })
   const ref = useRef(null)
   useOnClickOutside(ref, closeMenu)
 
@@ -195,50 +218,59 @@ const MenuDialog = ({closeMenu}: Props) => {
               placeholder="search for a blog post"
               id="blog-post-search"
               name="search"
+              value={filterValue}
+              onChange={(e) =>
+                dispatch({type: "SET_FIELD_VALUE", payload: e.target.value})
+              }
             />
           </Label>
         </Form>
 
         <Container>
-          <Banner text="Command shortcuts" />
+          {length(filterValue) ? (
+            <p>item</p>
+          ) : (
+            <Fragment>
+              <Banner text="Command shortcuts" />
+              <CmdKeys>
+                {cmdKeys.map(({name, keys}) => (
+                  <li key={name}>
+                    {name}
+                    <div className="keys">
+                      {keys.map((key) => (
+                        <span key={key}>{key}</span>
+                      ))}
+                    </div>
+                  </li>
+                ))}
+              </CmdKeys>
 
-          <CmdKeys>
-            {cmdKeys.map(({name, keys}) => (
-              <li key={name}>
-                {name}
-                <div className="keys">
-                  {keys.map((key) => (
-                    <span key={key}>{key}</span>
-                  ))}
-                </div>
-              </li>
-            ))}
-          </CmdKeys>
+              <Banner text="Social links" />
+              <SocialWrapper>
+                {socialMedia.map(({name, url}) => (
+                  <li key={name}>
+                    <a href={url}>
+                      {renderIcon(name)}
+                      {name}
+                    </a>
+                  </li>
+                ))}
+              </SocialWrapper>
 
-          <Banner text="Social links" />
-          <SocialWrapper>
-            {socialMedia.map(({name, url}) => (
-              <li key={name}>
-                <a href={url}>
-                  {renderIcon(name)}
-                  {name}
-                </a>
-              </li>
-            ))}
-          </SocialWrapper>
-
-          <Banner text="Navigation" />
-          <RoutesWrapper>
-            <RouteLink name="home" path="/" active={activeLink("/")} />
-            {routes.map(({name, path}) => (
-              <RouteLink
-                key={name}
-                name={name}
-                path={path}
-                active={activeLink(path)}
-              />
-            ))}
-          </RoutesWrapper>
+              <Banner text="Navigation" />
+              <RoutesWrapper>
+                <RouteLink name="home" path="/" active={activeLink("/")} />
+                {routes.map(({name, path}) => (
+                  <RouteLink
+                    key={name}
+                    name={name}
+                    path={path}
+                    active={activeLink(path)}
+                  />
+                ))}
+              </RoutesWrapper>
+            </Fragment>
+          )}
         </Container>
       </Body>
     </Overlay>,

@@ -70,7 +70,9 @@ const Header = () => {
   } = useToggle()
 
   useHotkeys("ctrl+k", toggleMenu)
-  useHotkeys("ctrl+t", handleTheme)
+  useHotkeys("ctrl+t", handleTheme, {keyup: true, filterPreventDefault: true}, [
+    storedTheme,
+  ])
 
   return (
     <Fragment>

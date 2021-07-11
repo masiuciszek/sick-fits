@@ -12,7 +12,7 @@ import {above, below} from "@styles/media-query"
 import {colors, fonts, sizes} from "@styles/styled-record"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import React, {Fragment, useCallback} from "react"
+import {Fragment} from "react"
 import {useHotkeys} from "react-hotkeys-hook"
 
 import Navigation from "./nav"
